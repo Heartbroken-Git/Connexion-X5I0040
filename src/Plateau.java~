@@ -53,5 +53,21 @@ class Plateau
 		return rechercheMemePere(case1, case2) && case1.getCol() == case2.getCol();
 	}
 	
+	public void afficherComposante(Case case1, Case case2, String col)
+	{
+		int limite = longueur_-1;
+		if (limite > case2.getX() || limite > case2.getY())
+		{
+			if existeCheminCases()
+			{
+				System.out.println(case2.getX()+" : "+case2.getY());
+			}
+			case2.incX();
+			afficherComposante(case1, case2);
+			case2.incY();
+			afficherComposante(case1, case2);
+			
+		}
+	}	
 	
 }

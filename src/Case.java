@@ -3,7 +3,7 @@ class Case
 	private int x_;
 	private int y_;
 	private String col_;
-	private boolean aEtoile_;
+	private int nbEtoile_;
 	
 	public Case(int x, int y)
 	{
@@ -23,9 +23,9 @@ class Case
 		return x_;
 	}
 	
-	public boolean getAEtoile()
+	public int getNbEtoile()
 	{
-		return aEtoile_;
+		return nbEtoile_;
 	}
 	
 	public String getCol()
@@ -48,9 +48,19 @@ class Case
 		col_ = col;
 	}
 	
-	public void setAEtoile(boolean aEtoile)
+	public void setNbEtoile(int nbEtoile)
 	{
-		aEtoile_ = aEtoile;
+		nbEtoile_ = nbEtoile;
+	}
+	
+	public void incX()
+	{
+		++x_;
+	}
+	
+	public void incY()
+	{
+		++y_;
 	}
 	
 	public void colorerCase(String col)
