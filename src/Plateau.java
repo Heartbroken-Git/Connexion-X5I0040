@@ -55,17 +55,17 @@ class Plateau
 	
 	public void afficherComposante(Case case1, Case case2, String col)
 	{
-		int limite = longueur_-1;
+		int limite = getLongueur()-1;
 		if (limite > case2.getX() || limite > case2.getY())
 		{
-			if existeCheminCases()
+			if (existeCheminCases(case1, case2, col))
 			{
 				System.out.println(case2.getX()+" : "+case2.getY());
 			}
 			case2.incX();
-			afficherComposante(case1, case2);
+			afficherComposante(case1, case2, col);
 			case2.incY();
-			afficherComposante(case1, case2);
+			afficherComposante(case1, case2, col);
 			
 		}
 	}

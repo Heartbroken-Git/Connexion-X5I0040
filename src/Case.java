@@ -5,12 +5,12 @@ class Case
 	private String col_;
 	private int nbEtoile_;
 	
-	public Case(int x, int y)
+	public Case(int x, int y, int nbEtoile)
 	{
 		x_ = x;
 		y_ = y;
 		col_ = "blanc";
-		aEtoile_ = false;
+		nbEtoile_ = nbEtoile;
 	}
 	
 	public int getY()
@@ -65,7 +65,7 @@ class Case
 	
 	public void colorerCase(String col)
 	{
-		if(col_ = "blanc")
+		if(col_ == "blanc")
 		{
 			col_ = col;
 		}
