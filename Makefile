@@ -6,3 +6,5 @@ compile:
 
 cleanup:
 	mv src/*.class bin
+	rm src/*.java~
+
