@@ -74,7 +74,7 @@ class Plateau
 	{
 		Case daddy = tableauPeres_[xp][yp];
 		Case son = tableauPeres_[xf][yf];
-		if !(son.equals(daddy)) 
+		if (!(son.equals(daddy))) 
 		{
 			if (daddy.getCol() == "bleu")
 			{
