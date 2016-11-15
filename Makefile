@@ -8,3 +8,8 @@ cleanup:
 	mv src/*.class bin
 	rm src/*.java~
 
+clean: cleanup
+	rm bin/*.class
+	
+mrproper: clean
+	rm Main
