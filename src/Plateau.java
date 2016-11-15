@@ -70,6 +70,46 @@ class Plateau
 		}
 	}
 	
+	public void union(int xf, int yf, int xp, int yp)
+	{
+		Case daddy = tableauPeres_[xp][yp];
+		Case son = tableauPeres_[xf][yf];
+		if (!(son.equals(daddy))) 
+		{
+			if (daddy.getCol() == "bleu")
+			{
+				scoreJ2_ += son.getNbEtoiles();
+			}
+			else if (daddy.getCol() == "rouge")
+			{
+				scoreJ1_ += son.getNbEtoiles();
+			}
+			daddy.setNbEtoiles(daddy.getNbEtoiles()+son.getNbEtoiles());
+			tableauPeres_[xp][yp] = tableauPeres_[xf][yf]; //son=daddy
+		}
+	}
+	
+	public int getNbEtoiles(int x, int y, String col)
+	{
+		System.out.println("La composante dont la case ["+x+", "+y+"] fait parti et de couleur "+col+" contient "+tableauPeres_[x][y].getNbEtoiles()+" *");
+		return tableauPeres_[x][y].getNbEtoiles();
+	}	
+	
+	public void afficheScores(String col)
+	{
+		if (col == "bleu")
+		{
+			System.out.println(scoreJ2_);
+		}
+		else if (col == "rouge")
+		{
+			System.out.println(scoreJ1_);
+		}
+		else
+		{
+			System.out.println("En rouge et noir !");
+		}
 		
+	}
 	
 }
