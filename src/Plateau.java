@@ -111,5 +111,20 @@ class Plateau
 		}
 		
 	}
+
+	public initialiser()
+	{
+		int max = 11;
+		tableauPeres_ = new Case[max][max];
+		int i, j = 0;
+		for(i=0; i<max-1; ++i)
+		{
+			for(j=0; j<(max-1); ++j)
+			{
+				tableauPeres_[i][j] = new Case(i, j, 0);
+				
+				}
+			}
+	}
 	
 }
