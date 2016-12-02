@@ -1,3 +1,5 @@
+import java.util.Random;
+
 class Plateau
 {
 	private Case tableauPeres_[][];
@@ -5,6 +7,7 @@ class Plateau
 	private int scoreJ1_;
 	private int scoreJ2_;
 	
+	// Constructeur du plateau
 	public Plateau(int longueur)
 	{
 		scoreJ1_ = 0;
@@ -12,6 +15,7 @@ class Plateau
 		longueur_ = longueur;
 	}
 	
+	// Accesseurs pour le plateau
 	public int getLongueur()
 	{
 		return longueur_;
@@ -42,6 +46,7 @@ class Plateau
 		scoreJ2_ = score;
 	}
 	
+	// Pour la question 3) existeCheminCases
 	public boolean rechercheMemePere(Case case1, Case case2)
 	{
 		// compression de chemin à faire
@@ -53,7 +58,8 @@ class Plateau
 		return rechercheMemePere(case1, case2) && case1.getCol() == case2.getCol();
 	}
 	
-	public void afficherComposante(Case case1, Case case2, String col)
+	// Pour la question 2) afficheComposante
+	public void afficheComposante(Case case1, Case case2, String col)
 	{
 		int limite = getLongueur()-1;
 		if (limite > case2.getX() || limite > case2.getY())
@@ -85,7 +91,7 @@ class Plateau
 				scoreJ1_ += son.getNbEtoiles();
 			}
 			daddy.setNbEtoiles(daddy.getNbEtoiles()+son.getNbEtoiles());
-			tableauPeres_[xp][yp] = tableauPeres_[xf][yf]; //son=daddy
+			tableauPeres_[xp][yp] = tableauPeres_[xf][yf]; 
 		}
 	}
 	
@@ -95,6 +101,11 @@ class Plateau
 		return tableauPeres_[x][y].getNbEtoiles();
 	}	
 	
+	public void nombresEtoiles(int x, int y, String col)
+	{
+		System.out.println("Pour la case de position ["+x+", "+y+"] et de couleur "+col+" le nombre d'étoiles est "+getNbEtoiles(x,y,col));
+	}
+
 	public void afficheScores(String col)
 	{
 		if (col == "bleu")
@@ -112,9 +123,51 @@ class Plateau
 		
 	}
 
+	// Pour la question 7) relieComposantes
+	public boolean relierComposantes(int x, int y, String col)
+	{
+		if (x == 0)
+		{
+		 	return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
+		}
+		else if (y == 0)
+		{
+			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
+				|| tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol())
+		}
+		else if (x == 0 && y == 0)
+		{
+			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
+		}
+		else
+		{
+			return (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x-1][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
+		}
+
+		
+
+	}
+
 	public initialiser()
 	{
-		int max = 11;
+		
+		int max = randInt(2,20);
 		tableauPeres_ = new Case[max][max];
 		int i, j = 0;
 		for(i=0; i<max-1; ++i)
@@ -123,8 +176,19 @@ class Plateau
 			{
 				tableauPeres_[i][j] = new Case(i, j, 0);
 				
-				}
 			}
+		}
+	}
+
+	public int randInt(int min, int max) 
+	{
+    	Random rand = new Random();
+    	int randomNum = rand.nextInt((max - min) + 1) + min;
+    	return randomNum;
+	}
+
+	public void joueDeuxHumains()
+	{
 	}
 	
 }
