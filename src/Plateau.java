@@ -107,7 +107,7 @@ class Plateau
 		}
 		else
 		{
-			System.out.println("En rouge et noir !");
+			System.out.println("Couleur fausse");
 		}
 		
 	}
