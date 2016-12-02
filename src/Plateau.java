@@ -170,11 +170,11 @@ class Plateau
 
 	}
 
-	public initialiser()
+	public void initialiser()
 	{
 		
-		int max = randInt(2,20);
-		tableauPeres_ = new Case[max][max];
+		//int max = randInt(2,10);
+		tableauPeres_ = new Case[longueur_][longueur_];
 		int i, j = 0;
 		for(i=0; i<max-1; ++i)
 		{
@@ -195,6 +195,7 @@ class Plateau
 
 	public void joueDeuxHumains()
 	{
+		initialiser();
 	}
 	
 }
