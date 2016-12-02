@@ -124,9 +124,9 @@ class Plateau
 	}
 
 	// Pour la question 7) relieComposantes
-	public boolean relierComposantes(int x, int y, String col)
+	public boolean relieComposantes(int x, int y, String col)
 	{
-		if (x == 0)
+		/*if (x == 0)
 		{
 		 	return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol()
@@ -158,9 +158,15 @@ class Plateau
 		 		|| tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
-		}
+		}*/
+
 
 		
+
+	}
+
+	public boolean relierCasesMin()
+	{
 
 	}
 
