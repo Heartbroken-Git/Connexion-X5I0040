@@ -69,13 +69,15 @@ class Plateau
 				System.out.println(case2.getX()+" : "+case2.getY());
 			}
 			case2.incX();
-			afficherComposante(case1, case2, col);
+			afficheComposante(case1, case2, col);
 			case2.incY();
-			afficherComposante(case1, case2, col);
+			afficheComposante(case1, case2, col);
 			
 		}
 	}
 	
+	
+
 	public void union(int xf, int yf, int xp, int yp)
 	{
 		Case daddy = tableauPeres_[xp][yp];
@@ -84,22 +86,22 @@ class Plateau
 		{
 			if (daddy.getCol() == "bleu")
 			{
-				scoreJ2_ += son.getNbEtoiles();
+				scoreJ2_ += son.getNbEtoile();
 			}
 			else if (daddy.getCol() == "rouge")
 			{
-				scoreJ1_ += son.getNbEtoiles();
+				scoreJ1_ += son.getNbEtoile();
 			}
-			daddy.setNbEtoiles(daddy.getNbEtoiles()+son.getNbEtoiles());
+			daddy.setNbEtoile(daddy.getNbEtoile()+son.getNbEtoile());
 			tableauPeres_[xp][yp] = tableauPeres_[xf][yf]; 
 		}
 	}
 	
 	public int getNbEtoiles(int x, int y, String col)
 	{
-		System.out.println("La composante dont la case ["+x+", "+y+"] fait parti et de couleur "+col+" contient "+tableauPeres_[x][y].getNbEtoiles()+" *");
-		return tableauPeres_[x][y].getNbEtoiles();
-	}	
+		System.out.println("La composante dont la case ["+x+", "+y+"] fait parti et de couleur "+col+" contient "+tableauPeres_[x][y].getNbEtoile()+" *");
+		return tableauPeres_[x][y].getNbEtoile();
+	}
 	
 	public void nombresEtoiles(int x, int y, String col)
 	{
@@ -160,14 +162,14 @@ class Plateau
 		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
 		}*/
 
-
+		return true;
 		
 
 	}
 
 	public boolean relierCasesMin()
 	{
-
+		return true;
 	}
 
 	public void initialiser()
@@ -176,9 +178,9 @@ class Plateau
 		//int max = randInt(2,10);
 		tableauPeres_ = new Case[longueur_][longueur_];
 		int i, j = 0;
-		for(i=0; i<max-1; ++i)
+		for(i=0; i<longueur_; ++i)
 		{
-			for(j=0; j<(max-1); ++j)
+			for(j=0; j<longueur_; ++j)
 			{
 				tableauPeres_[i][j] = new Case(i, j, 0);
 				
