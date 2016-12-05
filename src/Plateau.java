@@ -3,7 +3,11 @@ import java.util.Scanner;
 
 class Plateau
 {
-	private static Scanner clavier =new Scanner(System.in);
+	private String red_ = "\u001B[31m";
+	private String reset_ = "\u001B[0m";
+	private String blue_ = "\u001B[34m";
+
+	private Scanner clavier =new Scanner(System.in);
 	private Case tableauPeres_[][];
 	private int longueur_;
 	private int scoreJ1_;
@@ -53,12 +57,12 @@ class Plateau
 		if (tableauPeres_[x][y].getX() != x && tableauPeres_[x][y].getY() != y)
 		{
 			tableauPeres_[x][y] = tableauPeres_[tableauPeres_[x][y].getX()][tableauPeres_[x][y].getY()];
-			compressionChemin(tableauPeres[x][y].getX(), tableauPeres[x][y].getY());
-			System.out.println(x, y);
+			compressionChemin(tableauPeres_[x][y].getX(), tableauPeres_[x][y].getY());
+			System.out.println(x+":"+y);
 		}
 		else
 		{
-			System.out.println(x, y);
+			System.out.println(x+":"+y);
 		}
 	}
 
@@ -228,6 +232,23 @@ class Plateau
 		{
 			res += " *** joueur BLEU *** \n\n";
 		}
+			
+		
+		for(int x = 0; x < (longueur_ - 1); ++x) 
+		{
+			
+			for(int y = 0; y < (longueur_ - 1); ++y) 
+			{
+				if(tableauPeres_[x][y].getCol() == "blanc") res += " W ";
+				if(tableauPeres_[x][y].getCol() == "rouge") res +=  red_+" R "+reset_;
+				if(tableauPeres_[x][y].getCol() == "bleu")	res += blue_+" B "+reset_;
+			}
+			res += "\n";
+			
+		}
+		
+		
+		System.out.println(res);
 
 
 	}
