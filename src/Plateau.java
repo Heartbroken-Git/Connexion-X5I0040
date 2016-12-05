@@ -239,9 +239,11 @@ class Plateau
 			
 			for(int y = 0; y < (longueur_ - 1); ++y) 
 			{
-				if(tableauPeres_[x][y].getCol() == "blanc") res += " W ";
-				if(tableauPeres_[x][y].getCol() == "rouge") res +=  red_+" R "+reset_;
-				if(tableauPeres_[x][y].getCol() == "bleu")	res += blue_+" B "+reset_;
+				if(tableauPeres_[x][y].getCol() == "blanc") res += " ⬜ ";
+				if(tableauPeres_[x][y].getCol() == "rouge") res +=  red_+" ⬜ "+reset_;
+				if(tableauPeres_[x][y].getCol() == "bleu")	res += blue_+" ⬜ "+reset_;
+				// pour les étoiles ⬚
+
 			}
 			res += "\n";
 			
