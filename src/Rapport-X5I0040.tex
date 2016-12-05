@@ -1,0 +1,73 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage[frenchb]{babel}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\newcommand{\info}{\texttt}
+\newcommand{\ue}{\textbf{X5I0040 "Algorithmique et Structures de Données 3"}}
+
+\pagestyle{fancy}
+\fancyfoot[C]{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{X5I0040\\ Projet "Jeu Connexion"}
+\author{Sidney \bsc{Falhun} \and Corentin \bsc{Chédotal}}
+\date{9 Décembre 2016}
+
+\begin{document}
+
+\maketitle
+%\thispagestyle{fancy}
+
+\vspace{4cm} %PENSER A ADAPTER LE SAUT DE LIGNE A LA TABLE DES MATIERES
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+    Dans le cadre de l'Unité d'Enseignement \ue nous avons été amené à réaliser le Projet "Jeu Connexion". Il consiste en l'implémentation d'un jeu tout en suivant un cahier des charges particulier. Le jeu consiste en la capture de diverses cases d'un plateau carré par deux joueurs dans le but d'intégrer dans ses zones de contrôle le plus de cases étoilées possible. Nous devions programmer notre implémentation du jeu en Java et en utilisant les structures de données vues en cours de notre choix. Enfin concernant l'interface graphique nous n'avions pas de consignes particulières mais il était précisé de ne pas perdre trop de temps dessus, celle-ci n'étant pas notée.
+    
+    Dans ce rapport, comme demandé, nous expliciterons le fonctionnement de notre vision du projet. En commençant par sa compilation et son exécution, puis en montrant son implémentation et enfin en donnant des jeux de données types permettant de tester le bon fonctionnement du programme.
+
+\section{Exécution et compilation}
+
+    Ce projet utilise un fichier \info{Makefile} pour faciliter la compilation pour l'Utilisateur. Nous allons donc expliciter ci-après les commandes importantes de ce fichier.
+
+    Pour compiler et exécuter le projet l'Utilisateur n'a qu'à faire \info{make}. Le \info{Makefile} s'occupera du reste. Si l'Utilisateur souhaite uniquement compiler le projet il a à sa disposition la commande \info{make compile}. Enfin, sont implémentées dans le fichier les commandes \info{make clean} et \info{make mrproper} afin de supprimer les fichiers intermédiaires et tout les fichiers résultant de la compilation respectivement.  
+
+\section{Implémentation}
+
+    Dans cette section nous allons rentrer dans le détail de l'implémentation du projet en expliquant notre choix de structures de données parmi toutes celles vues en cours. Puis on indiquera en détail comment nous avons répondu aux questions concernant les méthodes à implémenter obligatoirement.
+
+    \subsection{Structures de données choisies}
+
+        La structure de données vues en cours que nous avons décidé d'utiliser est la \emph{Classe-Union}. Initialement on a donc une Classe (au sens de la \emph{Classe-Union} pas de la programmation orientée objet) par case du plateau de jeu. Puis par les utilisations d'Union (par la méthode du même nom dans \info{Plateau.java}) ce sont les Composantes qui vont être les Classes. De plus afin d'optimiser les appels nous avons implémenter une compression des chemins.
+        
+        Ainsi on peut facilement ajouter des cases au fur et à mesure du déroulement du jeu au différentes Composantes et fusionner les Composantes entre elles (si elles sont de la bonne couleur bien sur).
+
+    \subsection{Implémentation des méthodes obligatoires}
+
+        Le cahier des charges du projet réquérait l'implémentation de dix méthodes spécifiques. Dans cette partie nous allons montrer comme demandé notre façon de les intégrer au programme.
+        
+            \subsubsection{PONEY}
+
+    \subsection{\emph{optionnel} Méthodes d'évaluation}
+
+\section{Jeux de données}
+
+\section{Conclusion}
+
+\end{document}
+
