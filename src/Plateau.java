@@ -215,9 +215,19 @@ class Plateau
 		initialiser();
 	}
 
-	public void afficher()
+	public void afficher(int tour)
 	{
-		
+		String res = new String();
+		if (tour % 2 == 1)
+		{
+			res += " *** joueur ROUGE *** \n\n";
+		}
+		else if (tour % 2 == 0)
+		{
+			res += " *** joueur BLEU *** \n\n";
+		}
+
+
 	}
 	
 }
