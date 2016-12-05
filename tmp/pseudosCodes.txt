@@ -1,0 +1,10 @@
+1)
+Procedure colorerCase(chaine col)
+debut
+	// col_ est l'attribut privé pour la couleur d'une case
+	si (col_ = "blanc") alors
+		col_ <- col
+	sinon
+		afficher("Cette case est déjà en couleur")
+	fin si
+fin
