@@ -1,7 +1,9 @@
 import java.util.Random;
+import java.util.Scanner;
 
 class Plateau
 {
+	private static Scanner clavier =new Scanner(System.in);
 	private Case tableauPeres_[][];
 	private int longueur_;
 	private int scoreJ1_;
