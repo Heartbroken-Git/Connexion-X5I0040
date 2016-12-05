@@ -46,10 +46,25 @@ class Plateau
 		scoreJ2_ = score;
 	}
 	
+	public void compressionChemin(int x, int y)
+	{
+		if (tableauPeres_[x][y].getX() != x && tableauPeres_[x][y].getY() != y)
+		{
+			tableauPeres_[x][y] = tableauPeres_[tableauPeres_[x][y].getX()][tableauPeres_[x][y].getY()];
+			compressionChemin(tableauPeres[x][y].getX(), tableauPeres[x][y].getY());
+			System.out.println(x, y);
+		}
+		else
+		{
+			System.out.println(x, y);
+		}
+	}
+
 	// Pour la question 3) existeCheminCases
 	public boolean rechercheMemePere(Case case1, Case case2)
 	{
-		// compression de chemin à faire
+		compressionChemin(case1.getX(), case1.getY());
+		compressionChemin(case2.getX(), case2.getY());
 		return tableauPeres_[case1.getX()][case1.getY()] == tableauPeres_[case2.getX()][case2.getY()];
 	}	
 	
@@ -198,6 +213,11 @@ class Plateau
 	public void joueDeuxHumains()
 	{
 		initialiser();
+	}
+
+	public void afficher()
+	{
+		
 	}
 	
 }
