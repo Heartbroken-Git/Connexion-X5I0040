@@ -63,6 +63,7 @@ class Case
 		++y_;
 	}
 	
+	//Pour la question 1) colorerCase()
 	public void colorerCase(String col)
 	{
 		if(col_ == "blanc")
