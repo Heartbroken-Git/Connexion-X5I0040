@@ -260,7 +260,8 @@ class Plateau
 			x = clavier.nextInt();
 			System.out.println("Quel est la valeur de y ?");
 			y = clavier.nextInt();
-
+			tableauPeres_[x][y].colorerCase(couleur);
+			
 			++i;
 		}
 	}
