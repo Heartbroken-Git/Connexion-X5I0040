@@ -82,6 +82,7 @@ class Plateau
 	// Pour la question 2) afficheComposante
 	public void afficheComposante(Case case1, Case case2, String col)
 	{
+
 		int limite = getLongueur()-1;
 		if (limite > case2.getX() || limite > case2.getY())
 		{
@@ -95,6 +96,7 @@ class Plateau
 			afficheComposante(case1, case2, col);
 			
 		}
+
 	}
 	
 	
@@ -195,7 +197,8 @@ class Plateau
 
 	public void initialiser()
 	{
-		
+		int nombreE;
+		int k = 0;
 		//int max = randInt(2,10);
 		tableauPeres_ = new Case[longueur_][longueur_];
 		int i, j = 0;
@@ -207,9 +210,14 @@ class Plateau
 				
 			}
 		}
-		addEtoile("bleu");
-		addEtoile("rouge");
-
+		System.out.println("Combien d'étoiles souhaitez vous pour chaque joueur ?");
+		nombreE = clavier.nextInt();
+		while (k < nombreE)
+		{
+			addEtoile("bleu");
+			addEtoile("rouge");
+			++k;
+		}
 	}
 
 	public void addEtoile(String couleur)
@@ -231,7 +239,30 @@ class Plateau
 
 	public void joueDeuxHumains()
 	{
+		boolean fin = false;
+		int i = 0;
+		int x = 0;
+		int y = 0;
+		String couleur;
 		initialiser();
+		while (!fin)
+		{
+			if (i % 2 == 0)
+			{
+				couleur = "bleu";
+			}
+			else
+			{
+				couleur = "rouge";
+			}
+			afficher(i);
+			System.out.println("Quel est la valeur de x ?");
+			x = clavier.nextInt();
+			System.out.println("Quel est la valeur de y ?");
+			y = clavier.nextInt();
+
+			++i;
+		}
 	}
 
 	public void afficher(int tour)
