@@ -152,7 +152,7 @@ class Plateau
 	// Pour la question 7) relieComposantes
 	public boolean relieComposantes(int x, int y, String col)
 	{
-		/*if (x == 0)
+		if (x == 0)
 		{
 		 	return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol()
@@ -184,7 +184,7 @@ class Plateau
 		 		|| tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
-		}*/
+		}
 
 		return true;
 		
@@ -196,8 +196,15 @@ class Plateau
 		return true;
 	}
 
+	public void relierVoisins(int x, int y, String col)
+	{
+
+		
+	}
+
 	public void initialiser()
 	{
+
 		int nombreE;
 		int k = 0;
 		//int max = randInt(2,10);
@@ -225,10 +232,11 @@ class Plateau
 	{
 		int entier1;
 		int entier2;
+		boolean result = false;
 		entier1 = randInt(0, longueur_-1);
 		entier2 = randInt(0, longueur_-1);
 		tableauPeres_[entier1][entier2].setNbEtoile(1);
-		tableauPeres_[entier1][entier2].colorerCase(couleur);
+		result = tableauPeres_[entier1][entier2].colorerCase(couleur);
 	}
 
 	public int randInt(int min, int max) 
@@ -241,6 +249,7 @@ class Plateau
 	public void joueDeuxHumains()
 	{
 		boolean fin = false;
+		boolean result = false;
 		int i = 0;
 		int x = 0;
 		int y = 0;
@@ -257,12 +266,12 @@ class Plateau
 				couleur = "rouge";
 			}
 			afficher(i);
-
+			afficheScores(couleur);
 			System.out.println("Quel est la valeur de x ?");
 			x = clavier.nextInt();
 			System.out.println("Quel est la valeur de y ?");
 			y = clavier.nextInt();
-			tableauPeres_[x][y].colorerCase(couleur);
+			result = tableauPeres_[x][y].colorerCase(couleur);
 			++i;
 		}
 	}

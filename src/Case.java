@@ -64,15 +64,17 @@ class Case
 	}
 	
 	//Pour la question 1) colorerCase()
-	public void colorerCase(String col)
+	public boolean colorerCase(String col)
 	{
 		if(col_ == "blanc")
 		{
 			col_ = col;
+			return true;
 		}
 		else
 		{
 			System.out.println("Cette case est déjà en couleur.");
+			return false;
 		}
 	}
 }
