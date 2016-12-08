@@ -330,6 +330,93 @@ class Plateau
 		 		return tableauPeres_[x][y];
 		 	}
 		}
+		if (x == longueur_-1 && y == longueur_-1)
+		{
+			if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y]));
+				return tableauPeres_[x-1][y];
+			}
+			else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x][y+1]));
+				return tableauPeres_[x][y-1];
+			}
+			else if (tableauPeres_[x-1][y-1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y+1]));
+				return tableauPeres_[x-1][y-1];
+			}
+			else
+			{
+				return tableauPeres_[x][y];
+			}
+		 }
+		else if (x == longueur_-1)
+		{
+			if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y]));
+		 		return tableauPeres_[x-1][y];
+		 	}
+		 	else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x][y-1]));
+		 		return tableauPeres_[x][y-1];
+		 	}
+		 	else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x][y+1]));
+		 		return tableauPeres_[x][y+1];
+		 	}
+		 	else if (tableauPeres_[x-1][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y-1]));
+		 		return tableauPeres_[x-1][y-1];
+		 	}
+		 	else if (tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y+1]));
+		 		return tableauPeres_[x-1][y+1];
+		 	}
+
+		 	else
+		 	{
+		 		return tableauPeres_[x][y];
+		 	}
+		}
+		else if (y == longueur_-1)
+		{
+			if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y]));
+				return tableauPeres_[x+1][y];
+			}
+			else if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x-1][y]));
+				return tableauPeres_[x-1][y];
+			}
+			else if  (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x][y+1]));
+				return tableauPeres_[x][y-1];
+			}
+			else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y+1]));
+				return tableauPeres_[x+1][y-1];
+			}
+			else if (tableauPeres_[x-1][y-1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x-1][y+1]));
+				return tableauPeres_[x-1][y-1];
+			}
+			else
+			{
+				return tableauPeres_[x][y];
+			}
+		}
 		else
 		{
 			if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
