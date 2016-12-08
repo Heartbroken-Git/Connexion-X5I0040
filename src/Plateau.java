@@ -135,11 +135,12 @@ class Plateau
 	{
 		if (col == "bleu")
 		{
-			System.out.println(scoreJ2_);
+			System.out.println("Vous avez réussi à connecter "+scoreJ2_+ " étoiles.");
+
 		}
 		else if (col == "rouge")
 		{
-			System.out.println(scoreJ1_);
+			System.out.println("Vous avez réussi à connecter "+scoreJ1_+ " étoiles.");
 		}
 		else
 		{
@@ -256,12 +257,12 @@ class Plateau
 				couleur = "rouge";
 			}
 			afficher(i);
+
 			System.out.println("Quel est la valeur de x ?");
 			x = clavier.nextInt();
 			System.out.println("Quel est la valeur de y ?");
 			y = clavier.nextInt();
 			tableauPeres_[x][y].colorerCase(couleur);
-			
 			++i;
 		}
 	}
