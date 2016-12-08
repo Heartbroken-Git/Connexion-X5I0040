@@ -472,12 +472,12 @@ class Plateau
 	{
 		int entier1;
 		int entier2;
-		boolean result = false;
 		entier1 = randInt(0, longueur_-1);
 		entier2 = randInt(0, longueur_-1);
+		tableauPeres_[entier1][entier2].colorerCase(couleur);
 		tableauPeres_[entier1][entier2].setNbEtoile(1);
 		System.out.println(entier1+" : "+entier2);
-		result = tableauPeres_[entier1][entier2].colorerCase(couleur);
+
 	}
 
 	public int randInt(int min, int max) 
