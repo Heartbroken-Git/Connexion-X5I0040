@@ -51,7 +51,11 @@ class Plateau
 	{
 		scoreJ2_ = score;
 	}
-	
+	// Fin des accesseurs
+
+	//Pour notre classe union
+
+	//Compression de chemin pour un appel à classe (soit Case)
 	public void compressionChemin(int x, int y)
 	{
 		if (tableauPeres_[x][y].getX() != x && tableauPeres_[x][y].getY() != y)
@@ -66,41 +70,7 @@ class Plateau
 		}
 	}
 
-	// Pour la question 3) existeCheminCases
-	public boolean rechercheMemePere(Case case1, Case case2)
-	{
-		compressionChemin(case1.getX(), case1.getY());
-		compressionChemin(case2.getX(), case2.getY());
-		return tableauPeres_[case1.getX()][case1.getY()] == tableauPeres_[case2.getX()][case2.getY()];
-	}	
-	
-	public boolean existeCheminCases(Case case1, Case case2, String col)
-	{
-		return rechercheMemePere(case1, case2) && case1.getCol() == case2.getCol();
-	}
-	
-	// Pour la question 2) afficheComposante
-	public void afficheComposante(Case case1, Case case2, String col)
-	{
-
-		int limite = getLongueur()-1;
-		if (limite > case2.getX() || limite > case2.getY())
-		{
-			if (existeCheminCases(case1, case2, col))
-			{
-				System.out.println(case2.getX()+" : "+case2.getY());
-			}
-			case2.incX();
-			afficheComposante(case1, case2, col);
-			case2.incY();
-			afficheComposante(case1, case2, col);
-			
-		}
-
-	}
-	
-	
-
+	//Procédure union qui permet de faire l'union entre deux cases
 	public void union(int xf, int yf, int xp, int yp)
 	{
 		Case daddy = tableauPeres_[xp][yp];
@@ -119,7 +89,52 @@ class Plateau
 			tableauPeres_[xp][yp] = tableauPeres_[xf][yf]; 
 		}
 	}
+
+	//Fin class union
+
+	//Pour la question 2) afficheComposante
+	public void afficheComposante(Case case1, Case case2, String col)
+	{
+
+		int limite = getLongueur()-1;
+		if (limite > case2.getX() || limite > case2.getY())
+		{
+			if (existeCheminCases(case1, case2, col))
+			{
+				System.out.println(case2.getX()+" : "+case2.getY());
+			}
+			case2.incX();
+			afficheComposante(case1, case2, col);
+			case2.incY();
+			afficheComposante(case1, case2, col);
+			
+		}
+
+	}
+	//Fin question 2)
+
+	//Pour la question 3) existeCheminCases
+	public boolean rechercheMemePere(Case case1, Case case2)
+	{
+		compressionChemin(case1.getX(), case1.getY());
+		compressionChemin(case2.getX(), case2.getY());
+		return tableauPeres_[case1.getX()][case1.getY()] == tableauPeres_[case2.getX()][case2.getY()];
+	}	
 	
+	public boolean existeCheminCases(Case case1, Case case2, String col)
+	{
+		return rechercheMemePere(case1, case2) && case1.getCol() == case2.getCol();
+	}
+	//Fin question 3)
+
+	//Pour la question 4) relierCasesMin
+	public boolean relierCasesMin()
+	{
+		return true;
+	}
+	//Fin question 4)
+	
+	//Pour la question 5) nombresEtoiles
 	public int getNbEtoiles(int x, int y, String col)
 	{
 		System.out.println("La composante dont la case ["+x+", "+y+"] fait parti et de couleur "+col+" contient "+tableauPeres_[x][y].getNbEtoile()+" *");
@@ -130,7 +145,9 @@ class Plateau
 	{
 		System.out.println("Pour la case de position ["+x+", "+y+"] et de couleur "+col+" le nombre d'étoiles est "+getNbEtoiles(x,y,col));
 	}
+	//Fin question 5)
 
+	//Pour la question 6) afficheScores
 	public void afficheScores(String col)
 	{
 		if (col == "bleu")
@@ -148,6 +165,7 @@ class Plateau
 		}
 		
 	}
+	//Fin question 6)
 
 	// Pour la question 7) relieComposantes
 	public boolean relieComposantes(int x, int y, String col)
@@ -196,11 +214,9 @@ class Plateau
 		
 
 	}
+	//Fin question 7)
 
-	public boolean relierCasesMin()
-	{
-		return true;
-	}
+
 
 	public void relierVoisins(int x, int y, String col)
 	{
@@ -213,6 +229,7 @@ class Plateau
 		return case1.getX()+" : "+case1.getY();
 	}
 
+	//Procédure qui permet de récupérer les voisins d'une case
 	public Case getLesVoisins(int x, int y, String col)
 	{
 		/*for (int i = x-1; i <= x+1; ++i)
@@ -369,7 +386,9 @@ class Plateau
 		 	}
 		}
 	}
+	//Fin getLesVoisins
 
+	//Pour le jeu entre deux humains
 	public void initialiser()
 	{
 
@@ -393,57 +412,6 @@ class Plateau
 			addEtoile("bleu");
 			addEtoile("rouge");
 			++k;
-		}
-	}
-
-	public void addEtoile(String couleur)
-	{
-		int entier1;
-		int entier2;
-		boolean result = false;
-		entier1 = randInt(0, longueur_-1);
-		entier2 = randInt(0, longueur_-1);
-		tableauPeres_[entier1][entier2].setNbEtoile(1);
-		System.out.println(entier1+" : "+entier2);
-		result = tableauPeres_[entier1][entier2].colorerCase(couleur);
-	}
-
-	public int randInt(int min, int max) 
-	{
-    	Random rand = new Random();
-    	int randomNum = rand.nextInt((max - min) + 1) + min;
-    	return randomNum;
-	}
-
-	public void joueDeuxHumains()
-	{
-		boolean fin = false;
-		boolean result = false;
-		int i = 0;
-		int x = 0;
-		int y = 0;
-		String couleur;
-		initialiser();
-		while (!fin)
-		{
-			if (i % 2 == 0)
-			{
-				couleur = "bleu";
-			}
-			else
-			{
-				couleur = "rouge";
-			}
-			afficher(i);
-			afficheScores(couleur);
-			System.out.println("Quel est la valeur de x ?");
-			x = clavier.nextInt();
-			System.out.println("Quel est la valeur de y ?");
-			y = clavier.nextInt();
-			result = tableauPeres_[x][y].colorerCase(couleur);
-			System.out.println(relieComposantes(x, y, couleur));
-			union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
-			++i;
 		}
 	}
 
@@ -482,12 +450,64 @@ class Plateau
 			}
 			res += "\n";
 			
-		}
-		
-		
+		}	
 		System.out.println(res);
-
-
 	}
+
+	public void addEtoile(String couleur)
+	{
+		int entier1;
+		int entier2;
+		boolean result = false;
+		entier1 = randInt(0, longueur_-1);
+		entier2 = randInt(0, longueur_-1);
+		tableauPeres_[entier1][entier2].setNbEtoile(1);
+		System.out.println(entier1+" : "+entier2);
+		result = tableauPeres_[entier1][entier2].colorerCase(couleur);
+	}
+
+	public int randInt(int min, int max) 
+	{
+    	Random rand = new Random();
+    	int randomNum = rand.nextInt((max - min) + 1) + min;
+    	return randomNum;
+	}
+	//Fin jeu entre deux humains
+
+	//Pour la question 8) joueDeuxHumains
+	public void joueDeuxHumains()
+	{
+		boolean fin = false;
+		boolean result = false;
+		int i = 0;
+		int x = 0;
+		int y = 0;
+		String couleur;
+		initialiser();
+		while (!fin)
+		{
+			if (i % 2 == 0)
+			{
+				couleur = "bleu";
+			}
+			else
+			{
+				couleur = "rouge";
+			}
+			afficher(i);
+			afficheScores(couleur);
+			System.out.println("Quel est la valeur de x ?");
+			x = clavier.nextInt();
+			System.out.println("Quel est la valeur de y ?");
+			y = clavier.nextInt();
+			result = tableauPeres_[x][y].colorerCase(couleur);
+			System.out.println(relieComposantes(x, y, couleur));
+			union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
+			++i;
+		}
+	}
+	//Fin question 8)
+
+
 	
 }
