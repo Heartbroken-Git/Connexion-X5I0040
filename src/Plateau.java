@@ -162,17 +162,17 @@ class Plateau
 		}
 		else if (y == 0)
 		{
-			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
+			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
 				|| tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol()
 				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
 				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol()
-				|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol())
+				|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol());
 		}
 		else if (x == 0 && y == 0)
 		{
 			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
 				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
-				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
+				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
 		}
 		else
 		{
@@ -185,8 +185,6 @@ class Plateau
 		 		|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol()
 		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
 		}
-
-		return true;
 		
 
 	}
@@ -199,7 +197,52 @@ class Plateau
 	public void relierVoisins(int x, int y, String col)
 	{
 
-		
+
+	}
+
+	public void getLesVoisins(int x, int y, String col)
+	{
+		if (x == 0)
+		{
+		 	if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//return tableauPeres_[x+1][y];
+		 	}
+		 	else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//return tableauPeres_[x][y-1];
+		 	}
+		 }
+		 		
+		 	/*	|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
+		}
+		else if (y == 0)
+		{
+			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol());
+		}
+		else if (x == 0 && y == 0)
+		{
+			return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
+		}
+		else
+		{
+			return (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
+				|| tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x-1][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol()
+		 		|| tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol());
+		}*/
 	}
 
 	public void initialiser()
@@ -236,6 +279,7 @@ class Plateau
 		entier1 = randInt(0, longueur_-1);
 		entier2 = randInt(0, longueur_-1);
 		tableauPeres_[entier1][entier2].setNbEtoile(1);
+		System.out.println(entier1+" : "+entier2);
 		result = tableauPeres_[entier1][entier2].colorerCase(couleur);
 	}
 
@@ -272,6 +316,7 @@ class Plateau
 			System.out.println("Quel est la valeur de y ?");
 			y = clavier.nextInt();
 			result = tableauPeres_[x][y].colorerCase(couleur);
+			getLesVoisins(x, y, couleur);
 			++i;
 		}
 	}
