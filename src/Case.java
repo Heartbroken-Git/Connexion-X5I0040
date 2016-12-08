@@ -9,7 +9,7 @@ class Case
 	{
 		x_ = x;
 		y_ = y;
-		col_ = "bleu";
+		col_ = "blanc";
 		nbEtoile_ = nbEtoile;
 	}
 	

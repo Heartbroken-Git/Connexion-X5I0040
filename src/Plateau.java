@@ -207,6 +207,19 @@ class Plateau
 				
 			}
 		}
+		addEtoile("bleu");
+		addEtoile("rouge");
+
+	}
+
+	public void addEtoile(String couleur)
+	{
+		int entier1;
+		int entier2;
+		entier1 = randInt(0, longueur_-1);
+		entier2 = randInt(0, longueur_-1);
+		tableauPeres_[entier1][entier2].setNbEtoile(1);
+		tableauPeres_[entier1][entier2].colorerCase(couleur);
 	}
 
 	public int randInt(int min, int max) 
@@ -239,10 +252,19 @@ class Plateau
 			
 			for(int y = 0; y < (longueur_ - 1); ++y) 
 			{
-				if(tableauPeres_[x][y].getCol() == "blanc") res += " ⬜ ";
-				if(tableauPeres_[x][y].getCol() == "rouge") res +=  red_+" ⬜ "+reset_;
-				if(tableauPeres_[x][y].getCol() == "bleu")	res += blue_+" ⬜ "+reset_;
-				// pour les étoiles ⬚
+				if (tableauPeres_[x][y].getNbEtoile() < 1)
+				{
+					if(tableauPeres_[x][y].getCol() == "blanc") res += " ⬜ ";
+					if(tableauPeres_[x][y].getCol() == "rouge") res +=  red_+" ⬜ "+reset_;
+					if(tableauPeres_[x][y].getCol() == "bleu")	res += blue_+" ⬜ "+reset_;
+					// pour les étoiles ⬚
+				}
+				else
+				{
+					if(tableauPeres_[x][y].getCol() == "blanc") res += " * ";
+					if(tableauPeres_[x][y].getCol() == "rouge") res +=  red_+" * "+reset_;
+					if(tableauPeres_[x][y].getCol() == "bleu")	res += blue_+" * "+reset_;
+				}
 
 			}
 			res += "\n";
