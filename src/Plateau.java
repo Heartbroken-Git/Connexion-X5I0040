@@ -77,19 +77,10 @@ class Plateau
 		Case son = tableauPeres_[xf][yf];
 		if (!(son.equals(daddy))) 
 		{
-			if (daddy.getCol() == "bleu")
-			{
-				scoreJ2_ += son.getNbEtoile();
-			}
-			else if (daddy.getCol() == "rouge")
-			{
-				scoreJ1_ += son.getNbEtoile();
-			}
 			daddy.setNbEtoile(daddy.getNbEtoile()+son.getNbEtoile());
-			tableauPeres_[xp][yp] = tableauPeres_[xf][yf]; 
+			tableauPeres_[xf][yf] = tableauPeres_[xp][yp]; 
 		}
 	}
-
 	//Fin class union
 
 	//Pour la question 2) afficheComposante
@@ -137,7 +128,7 @@ class Plateau
 	//Pour la question 5) nombresEtoiles
 	public int getNbEtoiles(int x, int y, String col)
 	{
-		System.out.println("La composante dont la case ["+x+", "+y+"] fait parti et de couleur "+col+" contient "+tableauPeres_[x][y].getNbEtoile()+" *");
+		//System.out.println("La composante dont la case ["+x+", "+y+"] fait parti et de couleur "+col+" contient "+tableauPeres_[x][y].getNbEtoile()+" *");
 		return tableauPeres_[x][y].getNbEtoile();
 	}
 	
@@ -247,68 +238,54 @@ class Plateau
 				
 			}
 		}*/
-		if (x == 0)
+
+		if (x == 0 && y == 0)
 		{
-		 	if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
-		 	{
-		 		System.out.println(xandy(tableauPeres_[x+1][y]));
-		 		return tableauPeres_[x+1][y];
-		 	}
-		 	else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
-		 	{
-		 		System.out.println(xandy(tableauPeres_[x][y-1]));
-		 		return tableauPeres_[x][y-1];
-		 	}
-		 	else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
-		 	{
-		 		System.out.println(xandy(tableauPeres_[x][y+1]));
-		 		return tableauPeres_[x][y+1];
-		 	}
-		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
-		 	{
-		 		System.out.println(xandy(tableauPeres_[x+1][y-1]));
-		 		return tableauPeres_[x+1][y-1];
-		 	}
-		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
-		 	{
-		 		System.out.println(xandy(tableauPeres_[x+1][y-1]));
-		 		return tableauPeres_[x+1][y-1];
-		 	}
-		 	else if (tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
-		 	{
-		 		System.out.println(xandy(tableauPeres_[x+1][y+1]));
-		 		return tableauPeres_[x+1][y+1];
-		 	}
-		 	else
-		 	{
-		 		return tableauPeres_[x][y];
-		 	}
+			if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y]));
+				return tableauPeres_[x+1][y];
+			}
+			else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x][y+1]));
+				return tableauPeres_[x][y+1];
+			}
+			else if (tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y+1]));
+				return tableauPeres_[x+1][y+1];
+			}
+			else
+			{
+				return tableauPeres_[x][y];
+			}
 		 }
 		else if (y == 0)
 		{
 			if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x+1][y]));
+				//System.out.println(xandy(tableauPeres_[x+1][y]));
 				return tableauPeres_[x+1][y];
 			}
 			else if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x-1][y]));
+				//System.out.println(xandy(tableauPeres_[x-1][y]));
 				return tableauPeres_[x-1][y];
 			}
 			else if  (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x][y+1]));
+				//System.out.println(xandy(tableauPeres_[x][y+1]));
 				return tableauPeres_[x][y+1];
 			}
 			else if (tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x+1][y+1]));
+				//System.out.println(xandy(tableauPeres_[x+1][y+1]));
 				return tableauPeres_[x+1][y+1];
 			}
 			else if (tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x-1][y+1]));
+				//System.out.println(xandy(tableauPeres_[x-1][y+1]));
 				return tableauPeres_[x-1][y+1];
 			}
 			else
@@ -316,68 +293,83 @@ class Plateau
 				return tableauPeres_[x][y];
 			}
 		}
-		else if (x == 0 && y == 0)
+		else if (x == 0)
 		{
 			if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
-			{
-				System.out.println(xandy(tableauPeres_[x+1][y]));
-				return tableauPeres_[x+1][y];
-			}
-			else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
-			{
-				System.out.println(xandy(tableauPeres_[x][y+1]));
-				return tableauPeres_[x][y+1];
-			}
-			else if (tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
-			{
-				System.out.println(xandy(tableauPeres_[x+1][y+1]));
-				return tableauPeres_[x+1][y+1];
-			}
-			else
-			{
-				return tableauPeres_[x][y];
-			}
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y]));
+		 		return tableauPeres_[x+1][y];
+		 	}
+		 	else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x][y-1]));
+		 		return tableauPeres_[x][y-1];
+		 	}
+		 	else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x][y+1]));
+		 		return tableauPeres_[x][y+1];
+		 	}
+		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y-1]));
+		 		return tableauPeres_[x+1][y-1];
+		 	}
+		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y-1]));
+		 		return tableauPeres_[x+1][y-1];
+		 	}
+		 	else if (tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y+1]));
+		 		return tableauPeres_[x+1][y+1];
+		 	}
+		 	else
+		 	{
+		 		return tableauPeres_[x][y];
+		 	}
 		}
 		else
 		{
 			if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x-1][y]));
+				//System.out.println(xandy(tableauPeres_[x-1][y]));
 				return tableauPeres_[x-1][y];
 			}
 			else if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x+1][y]));
+				//System.out.println(xandy(tableauPeres_[x+1][y]));
 				return tableauPeres_[x+1][y];
 			}
 			else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
 			{
-				System.out.println(xandy(tableauPeres_[x][y+1]));
+				//System.out.println(xandy(tableauPeres_[x][y+1]));
 				return tableauPeres_[x][y+1];
 			}
 		 	else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
 		 	{
-		 		System.out.println(xandy(tableauPeres_[x][y-1]));
+		 		//System.out.println(xandy(tableauPeres_[x][y-1]));
 		 		return tableauPeres_[x][y-1];
 		 	}
 		 	else if (tableauPeres_[x-1][y-1].getCol() == tableauPeres_[x][y].getCol())
 		 	{
-		 		System.out.println(xandy(tableauPeres_[x-1][y-1]));
+		 		//System.out.println(xandy(tableauPeres_[x-1][y-1]));
 		 		return tableauPeres_[x-1][y-1];
 		 	}
 		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
 		 	{
-		 		System.out.println(xandy(tableauPeres_[x+1][y-1]));
+		 		//System.out.println(xandy(tableauPeres_[x+1][y-1]));
 		 		return tableauPeres_[x+1][y-1];
 		 	}
 		 	else if (tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol())
 		 	{
-		 		System.out.println(xandy(tableauPeres_[x-1][y+1]));
+		 		//System.out.println(xandy(tableauPeres_[x-1][y+1]));
 		 		return tableauPeres_[x-1][y+1];
 		 	}
 		 	else if (tableauPeres_[x+1][y+1].getCol() == tableauPeres_[x][y].getCol())
 		 	{
-		 		System.out.println(xandy(tableauPeres_[x+1][y+1]));
+		 		//System.out.println(xandy(tableauPeres_[x+1][y+1]));
 		 		return tableauPeres_[x+1][y+1];
 		 	}
 		 	else
@@ -389,7 +381,7 @@ class Plateau
 	//Fin getLesVoisins
 
 	//Pour le jeu entre deux humains
-	public void initialiser()
+	public int initialiser()
 	{
 
 		int nombreE;
@@ -412,6 +404,28 @@ class Plateau
 			addEtoile("bleu");
 			addEtoile("rouge");
 			++k;
+		}
+		return nombreE;
+	}
+
+	public void preparerScore(int x, int y, String col)
+	{
+
+		if (col == "bleu" && tableauPeres_[x][y].getNbEtoile() > scoreJ2_)
+		{
+			scoreJ2_ = tableauPeres_[x][y].getNbEtoile();
+		}
+		else if (col == "rouge" && tableauPeres_[x][y].getNbEtoile() > scoreJ1_)
+		{
+			scoreJ1_ = tableauPeres_[x][y].getNbEtoile();
+		}
+		else if (col == "bleu" && tableauPeres_[x][y].getNbEtoile() == scoreJ2_)
+		{
+			scoreJ2_ += tableauPeres_[x][y].getNbEtoile();
+		}
+		else if (col == "rouge" && tableauPeres_[x][y].getNbEtoile() == scoreJ1_)
+		{
+			scoreJ1_ += tableauPeres_[x][y].getNbEtoile();
 		}
 	}
 
@@ -479,11 +493,12 @@ class Plateau
 	{
 		boolean fin = false;
 		boolean result = false;
+		int etoiles;
 		int i = 0;
 		int x = 0;
 		int y = 0;
 		String couleur;
-		initialiser();
+		etoiles = initialiser();
 		while (!fin)
 		{
 			if (i % 2 == 0)
@@ -502,8 +517,28 @@ class Plateau
 			y = clavier.nextInt();
 			result = tableauPeres_[x][y].colorerCase(couleur);
 			System.out.println(relieComposantes(x, y, couleur));
-			union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
+			
+			System.out.println(existeCheminCases(getLesVoisins(x, y, couleur), tableauPeres_[x][y], couleur));
+			if (getNbEtoiles(x, y, couleur) > getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
+			{
+				union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
+			}
+			else
+			{
+				union(x, y, getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY());
+			}
+			preparerScore(x, y, couleur);
 			++i;
+			if (scoreJ2_ == etoiles)
+			{
+				System.out.println("Joueur bleu a gagné !");
+				fin = true;
+			}
+			else if (scoreJ1_ == etoiles)
+			{
+				System.out.println("Joueur rouge a gagné !");
+				fin = true;
+			}
 		}
 	}
 	//Fin question 8)
