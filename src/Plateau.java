@@ -261,6 +261,38 @@ class Plateau
 				return tableauPeres_[x][y];
 			}
 		 }
+		 else if (y == 0 && x == longueur_-1)
+		{
+			if (tableauPeres_[x][y].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y]));
+				return tableauPeres_[x][y];
+			}
+			else if (tableauPeres_[x-1][y].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x-1][y]));
+				return tableauPeres_[x-1][y];
+			}
+			else if  (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x][y+1]));
+				return tableauPeres_[x][y+1];
+			}
+			else if (tableauPeres_[x][y+1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x+1][y+1]));
+				return tableauPeres_[x][y+1];
+			}
+			else if (tableauPeres_[x-1][y+1].getCol() == tableauPeres_[x][y].getCol())
+			{
+				//System.out.println(xandy(tableauPeres_[x-1][y+1]));
+				return tableauPeres_[x-1][y+1];
+			}
+			else
+			{
+				return tableauPeres_[x][y];
+			}
+		}
 		else if (y == 0)
 		{
 			if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
@@ -292,6 +324,33 @@ class Plateau
 			{
 				return tableauPeres_[x][y];
 			}
+		}
+		else if (x == 0 && y == longueur_-1)
+		{
+			if (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y]));
+		 		return tableauPeres_[x+1][y];
+		 	}
+		 	else if (tableauPeres_[x][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x][y-1]));
+		 		return tableauPeres_[x][y-1];
+		 	}
+		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y-1]));
+		 		return tableauPeres_[x+1][y-1];
+		 	}
+		 	else if (tableauPeres_[x+1][y-1].getCol() == tableauPeres_[x][y].getCol())
+		 	{
+		 		//System.out.println(xandy(tableauPeres_[x+1][y-1]));
+		 		return tableauPeres_[x+1][y-1];
+		 	}
+		 	else
+		 	{
+		 		return tableauPeres_[x][y];
+		 	}
 		}
 		else if (x == 0)
 		{
@@ -529,10 +588,10 @@ class Plateau
 		}
 			
 		
-		for(int x = 0; x < (longueur_ - 1); ++x) 
+		for(int x = 0; x < (longueur_); ++x) 
 		{
 			
-			for(int y = 0; y < (longueur_ - 1); ++y) 
+			for(int y = 0; y < (longueur_); ++y) 
 			{
 				if (tableauPeres_[x][y].getNbEtoile() < 1)
 				{
