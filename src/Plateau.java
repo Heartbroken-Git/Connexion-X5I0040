@@ -123,15 +123,16 @@ class Plateau
 	public int relierCasesMin(int x, int y, int z, int t, String col)
 	{
 		boolean visite[][];
-		boolean tousVisite;
+		boolean tousVisite = false;
 		Case predecesseur[][];
 		int poids[][];
 		int min;
+		Case courante = new Case(0,0,0);
 		String couleur = "blanc";
 		predecesseur = new Case[longueur_][longueur_];
 		poids = new int[longueur_][longueur_];
 		visite = new boolean[longueur_][longueur_];
-		int k = 0;
+
 		for (int i = 0; i <= longueur_-1; ++i)
 		{
 			for(int j = 0; j <= longueur_-1; ++j)
@@ -158,6 +159,8 @@ class Plateau
 			poids[z][t] = poids[x][y]+1;
 			predecesseur[z][t] = tableauPeres_[x][y];
 		}
+
+		Case sommet = new Case(0,0,0);
 		min = Integer.MAX_VALUE;
 		for(int i = 0; i <= longueur_-1; ++i) 
 		{ 
@@ -166,11 +169,32 @@ class Plateau
 				if(!visite[i][j] && poids[i][j] < min) 
 				{
 					min = poids[i][j];
+					sommet = tableauPeres_[i][j];
 					
 				}
 			}
 		}
-		return min;
+		
+		int i = z;
+		int j = t;
+		int cpt = 0;
+
+		courante = tableauPeres_[i][j];
+
+		while ((i !=x) || (j != y))
+		{
+			if (courante.getCol() == col)
+			{
+				++cpt;
+			}
+
+			courante = predecesseur[i][j];
+			i = courante.getX();
+			j = courante.getY();
+
+		}
+
+		return poids[z][t] - cpt;
 	}
 	//Fin question 4)
 	
