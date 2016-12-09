@@ -574,14 +574,14 @@ class Plateau
 		{
 			scoreJ1_ = tableauPeres_[x][y].getNbEtoile();
 		}
-		else if (col == "bleu" && tableauPeres_[x][y].getNbEtoile() == scoreJ2_)
+		/*else if (col == "bleu" && tableauPeres_[x][y].getNbEtoile() == scoreJ2_)
 		{
 			scoreJ2_ += tableauPeres_[x][y].getNbEtoile();
 		}
 		else if (col == "rouge" && tableauPeres_[x][y].getNbEtoile() == scoreJ1_)
 		{
 			scoreJ1_ += tableauPeres_[x][y].getNbEtoile();
-		}
+		}/*
 	}
 
 	public void afficher(int tour)
