@@ -4,6 +4,7 @@ class Case
 	private int y_;
 	private String col_;
 	private int nbEtoile_;
+	private boolean estInitial_;
 	
 	public Case(int x, int y, int nbEtoile)
 	{
@@ -11,11 +12,17 @@ class Case
 		y_ = y;
 		col_ = "blanc";
 		nbEtoile_ = nbEtoile;
+		setEstInitial(false);
 	}
 	
 	public int getY()
 	{
 		return y_;
+	}
+
+	public boolean getEstInitial()
+	{
+		return estInitial_;
 	}
 	
 	public int getX()
@@ -52,6 +59,11 @@ class Case
 	{
 		nbEtoile_ = nbEtoile;
 	}
+
+	public void setEstInitial(boolean initial)
+	{
+		estInitial_ = initial;
+	}
 	
 	public void incX()
 	{
@@ -63,15 +75,18 @@ class Case
 		++y_;
 	}
 	
-	public void colorerCase(String col)
+	//Pour la question 1) colorerCase()
+	public boolean colorerCase(String col)
 	{
 		if(col_ == "blanc")
 		{
 			col_ = col;
+			return true;
 		}
 		else
 		{
 			System.out.println("Cette case est déjà en couleur.");
+			return false;
 		}
 	}
 }
