@@ -58,7 +58,7 @@ class Plateau
 	//Compression de chemin pour un appel à classe (soit Case)
 	public void compressionChemin(int x, int y)
 	{
-		if (tableauPeres_[x][y].getX() != x && tableauPeres_[x][y].getY() != y)
+		if (tableauPeres_[x][y].getX() != x && tableauPeres_[x][y].getY() != y && tableauPeres_[x][y].getCol() != "blanc")
 		{
 			tableauPeres_[x][y] = tableauPeres_[tableauPeres_[x][y].getX()][tableauPeres_[x][y].getY()];
 			tableauPeres_[x][y].setNbEtoile(tableauPeres_[tableauPeres_[x][y].getX()][tableauPeres_[x][y].getY()].getNbEtoile());
@@ -122,16 +122,15 @@ class Plateau
 	//Pour la question 4) relierCasesMin
 	public int relierCasesMin(int x, int y, int z, int t, String col)
 	{
-		String couleur = "blanc";
+		int i;
 		int k = 0;
-		for (int i =x; i <= longueur_-1; ++i)
+		if (x < z && y > t)
 		{
-			for (int j = y; j<=longueur_-1; ++j)
+			i = y;
+			while (y > t)
 			{
-				while (tableauPeres_[i][j] != tableauPeres_[z][t])
-				{
-					++k;
-				}
+				++k;
+				--y;
 			}
 		}
 		return k;
