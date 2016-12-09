@@ -4,6 +4,7 @@ class Case
 	private int y_;
 	private String col_;
 	private int nbEtoile_;
+	private boolean estInitial_;
 	
 	public Case(int x, int y, int nbEtoile)
 	{
@@ -11,11 +12,17 @@ class Case
 		y_ = y;
 		col_ = "blanc";
 		nbEtoile_ = nbEtoile;
+		setEstInitial(false);
 	}
 	
 	public int getY()
 	{
 		return y_;
+	}
+
+	public boolean getEstInitial()
+	{
+		return estInitial_;
 	}
 	
 	public int getX()
@@ -51,6 +58,11 @@ class Case
 	public void setNbEtoile(int nbEtoile)
 	{
 		nbEtoile_ = nbEtoile;
+	}
+
+	public void setEstInitial(boolean initial)
+	{
+		estInitial_ = initial;
 	}
 	
 	public void incX()

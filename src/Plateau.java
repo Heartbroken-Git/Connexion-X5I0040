@@ -86,20 +86,26 @@ class Plateau
 	//Fin class union
 
 	//Pour la question 2) afficheComposante
-	public void afficheComposante(Case case1, Case case2, String col)
+	public void afficheComposante(int x, int y, String col)
 	{
 
 		int limite = getLongueur()-1;
-		if (limite > case2.getX() || limite > case2.getY())
+
+		for (int i = 0; i < limite; ++i)
 		{
-			if (existeCheminCases(case1, case2, col))
+			for (int j=0; j < limite; ++j)
 			{
-				System.out.println(case2.getX()+" : "+case2.getY());
+				if (existeCheminCases(tableauPeres_[x][y], col))
+			{
+				System.out.println(x+" : "+y);
 			}
-			case2.incX();
-			afficheComposante(case1, case2, col);
-			case2.incY();
-			afficheComposante(case1, case2, col);
+				
+			
+			++x;
+			afficheComposante(x, y, col);
+			++y;
+			afficheComposante(x, y, col);
+		}
 			
 		}
 
@@ -109,8 +115,6 @@ class Plateau
 	//Pour la question 3) existeCheminCases
 	public boolean rechercheMemePere(Case case1, Case case2)
 	{
-		compressionChemin(case1.getX(), case1.getY());
-		compressionChemin(case2.getX(), case2.getY());
 		return tableauPeres_[case1.getX()][case1.getY()] == tableauPeres_[case2.getX()][case2.getY()];
 	}	
 	
@@ -632,7 +636,6 @@ class Plateau
 		entier2 = randInt(0, longueur_-1);
 		tableauPeres_[entier1][entier2].colorerCase(couleur);
 		tableauPeres_[entier1][entier2].setNbEtoile(1);
-		System.out.println(entier1+" : "+entier2);
 
 	}
 
@@ -684,8 +687,8 @@ class Plateau
 					x = clavier.nextInt();
 					System.out.println("Quel est la valeur de y ?");
 					y = clavier.nextInt();
+					compressionChemin(x, y);
 					result = tableauPeres_[x][y].colorerCase(couleur);
-					afficheScores(couleur);
 					//System.out.println(existeCheminCases(getLesVoisins(x, y, couleur), tableauPeres_[x][y], couleur));
 					if (getNbEtoiles(x, y, couleur) < getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
 					{
@@ -695,6 +698,9 @@ class Plateau
 					{
 						union(x, y, getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY());
 					}
+					preparerScore(x, y, couleur);
+					afficheScores(couleur);
+					nombresEtoiles(x, y, couleur);
 					++i;
 					break;
 				case 2:
@@ -707,6 +713,8 @@ class Plateau
 					x = clavier.nextInt();
 					System.out.println("Quel est la valeur de y de la deuxième case ?");
 					y = clavier.nextInt();
+					compressionChemin(x, y);
+					compressionChemin(x2, y2);
 					afficheComposante(tableauPeres_[x][y], tableauPeres_[x2][y2], couleur);
 					break;
 				case 3:
@@ -715,6 +723,7 @@ class Plateau
 					x = clavier.nextInt();
 					System.out.println("Quel est la valeur de y ?");
 					y = clavier.nextInt();
+					compressionChemin(x, y);
 					if(!relieComposantes(x, y, couleur))
 					{
 						System.out.println("Cette case ne relie aucune composante.");
@@ -734,6 +743,8 @@ class Plateau
 					x = clavier.nextInt();
 					System.out.println("Quel est la valeur de y de la deuxième case ?");
 					y = clavier.nextInt();
+					compressionChemin(x, y);
+					compressionChemin(x2, y2);
 					if (existeCheminCases(tableauPeres_[x][y], tableauPeres_[x2][y2], couleur))
 					{
 						System.out.println("Il existe un chemin entre les deux cases.");
@@ -747,10 +758,18 @@ class Plateau
 				case 5:
 					fin = true;
 					break;
-
-				
 			}
-		
+			if (scoreJ2_ == etoiles)
+			{
+				System.out.println("Joueur bleu a gagné !");
+				fin = true;
+			}
+			else if (scoreJ1_ == etoiles)
+			{
+				System.out.println("Joueur rouge a gagné !");
+				fin = true;
+			}
+
 		}
 	}
 	//Fin question 8)
