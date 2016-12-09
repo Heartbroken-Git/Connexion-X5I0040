@@ -125,16 +125,19 @@ class Plateau
 		boolean visite[][];
 		boolean tousVisite;
 		Case predecesseur[][];
-		int poids_[][];
+		int poids[][];
 		int min;
 		String couleur = "blanc";
+		predecesseur = new Case[longueur_][longueur_];
+		poids = new int[longueur_][longueur_];
+		visite = new boolean[longueur_][longueur_];
 		int k = 0;
 		for (int i = 0; i <= longueur_-1; ++i)
 		{
 			for(int j = 0; j <= longueur_-1; ++j)
 			{
 				poids[i][j] = Integer.MAX_VALUE;
-				if (tableauPeres_[i][j].getCol() != col && tableauPeres_[i][j] != couleur)
+				if (tableauPeres_[i][j].getCol() != col && tableauPeres_[i][j].getCol() != couleur)
 				{
 					visite[i][j] = true;
 					poids[i][j] = -1;
@@ -152,10 +155,22 @@ class Plateau
 
 		if(poids[z][t] > poids[x][y])
 		{
-			poids[z][t] = poids[x][y] +1;
+			poids[z][t] = poids[x][y]+1;
 			predecesseur[z][t] = tableauPeres_[x][y];
 		}
-		return k;
+		min = Integer.MAX_VALUE;
+		for(int i = 0; i <= longueur_-1; ++i) 
+		{ 
+			for(int j = 0; j <= longueur_-1; ++j) 
+			{		
+				if(!visite[i][j] && poids[i][j] < min) 
+				{
+					min = poids[i][j];
+					
+				}
+			}
+		}
+		return min;
 	}
 	//Fin question 4)
 	
