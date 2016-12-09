@@ -122,15 +122,12 @@ class Plateau
 	//Pour la question 4) relierCasesMin
 	public int relierCasesMin(int x, int y, int z, int t, String col)
 	{
-		int i;
 		int k = 0;
-		if (x < z && y > t)
+		for (int i = 0; i <= longueur_-1; ++i)
 		{
-			i = y;
-			while (y > t)
+			for(int j = 0; j <= longueur_-1; ++j)
 			{
-				++k;
-				--y;
+
 			}
 		}
 		return k;
