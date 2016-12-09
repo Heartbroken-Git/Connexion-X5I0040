@@ -122,15 +122,15 @@ class Plateau
 	//Pour la question 4) relierCasesMin
 	public int relierCasesMin(int x, int y, int z, int t, String col)
 	{
-		String couleur;
+		String couleur = "blanc";
 		int k = 0;
-		for (int i = x; i < z; ++i)
+		for (int i =x; i <= longueur_-1; ++i)
 		{
-			for (int j = y; j < t; ++j)
+			for (int j = y; j<=longueur_-1; ++j)
 			{
-				if (tableauPeres_[i][j].getCol() == "blanc" || tableauPeres_[i][j].getCol() == col)
-				{	
-					++k; 
+				while (tableauPeres_[i][j] != tableauPeres_[z][t])
+				{
+					++k;
 				}
 			}
 		}
@@ -737,9 +737,9 @@ class Plateau
 					System.out.println("Quel est la valeur de y de la première case ?");
 					y = clavier.nextInt();
 					System.out.println("Quel est la valeur de x de la deuxième case ?");
-					x = clavier.nextInt();
+					x2 = clavier.nextInt();
 					System.out.println("Quel est la valeur de y de la deuxième case ?");
-					y = clavier.nextInt();
+					y2 = clavier.nextInt();
 					compressionChemin(x, y);
 					compressionChemin(x2, y2);
 					if (existeCheminCases(tableauPeres_[x][y], tableauPeres_[x2][y2], couleur))
@@ -759,9 +759,9 @@ class Plateau
 					System.out.println("Quel est la valeur de y de la première case ?");
 					y = clavier.nextInt();
 					System.out.println("Quel est la valeur de x de la deuxième case ?");
-					x = clavier.nextInt();
+					x2 = clavier.nextInt();
 					System.out.println("Quel est la valeur de y de la deuxième case ?");
-					y = clavier.nextInt();
+					y2 = clavier.nextInt();
 					compressionChemin(x, y);
 					compressionChemin(x2, y2);
 					System.out.println(relierCasesMin(x, y, x2, y2, couleur));
