@@ -581,7 +581,7 @@ class Plateau
 		else if (col == "rouge" && tableauPeres_[x][y].getNbEtoile() == scoreJ1_)
 		{
 			scoreJ1_ += tableauPeres_[x][y].getNbEtoile();
-		}/*
+		}*/
 	}
 
 	public void afficher(int tour)
@@ -674,7 +674,7 @@ class Plateau
 			System.out.println(relieComposantes(x, y, couleur));
 			
 			System.out.println(existeCheminCases(getLesVoisins(x, y, couleur), tableauPeres_[x][y], couleur));
-			if (getNbEtoiles(x, y, couleur) > getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
+			if (getNbEtoiles(x, y, couleur) < getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
 			{
 				union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
 			}
