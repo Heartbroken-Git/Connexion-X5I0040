@@ -654,6 +654,8 @@ class Plateau
 		int i = 0;
 		int x = 0;
 		int y = 0;
+		int x2 = 0;
+		int y2 = 0;
 		String couleur;
 		etoiles = initialiser();
 		while (!fin)
@@ -668,49 +670,75 @@ class Plateau
 			}
 			System.out.println("1-Jouer");
 			System.out.println("2-Afficher une composante");
-			System.out.println("3-Vérifier si un pion relie une composante");
-			System.out.println("4-Regarder s'il existe un chemin entre deux cases d'une couleur donnée")
-			System.out.println("4-Quitter");
-
-			afficher(i);
+			System.out.println("3-Vérifier si une case relie une composante");
+			System.out.println("4-Regarder s'il existe un chemin entre deux cases d'une couleur donnée");
+			System.out.println("5-Quitter");
 			choix = clavier.nextInt();
-			afficheScores(couleur);
-			System.out.println("Quel est la valeur de x ?");
-			x = clavier.nextInt();
-			System.out.println("Quel est la valeur de y ?");
-			y = clavier.nextInt();
-			result = tableauPeres_[x][y].colorerCase(couleur);
-			if(!relieComposantes(x, y, couleur))
+			afficher(i);
+			switch (choix)
 			{
-				System.out.println("Cette case ne relie aucune composante.");
-			}
-			else
-			{
-				System.out.println("Cette case relie une ou plusieurs composante(s).");
-			}
-			
-			System.out.println(existeCheminCases(getLesVoisins(x, y, couleur), tableauPeres_[x][y], couleur));
-			if (getNbEtoiles(x, y, couleur) < getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
-			{
-				union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
-			}
-			else
-			{
-				union(x, y, getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY());
-			}
+				case 1:
+					
+					System.out.println("### Ajout d'une case pour jouer ###");
+					System.out.println("Quel est la valeur de x ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y ?");
+					y = clavier.nextInt();
+					result = tableauPeres_[x][y].colorerCase(couleur);
+					afficheScores(couleur);
+					break;
+				case 2:
+					System.out.println("### Afficher une composante ###");
+					System.out.println("Quel est la valeur de x de la première case ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y de la première case ?");
+					y = clavier.nextInt();
+					System.out.println("Quel est la valeur de x de la deuxième case ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y de la deuxième case ?");
+					y = clavier.nextInt();
+					afficheComposante(tableauPeres_[x][y], tableauPeres_[x2][y2], couleur);
+					break;
+				case 3:
+					System.out.println("### Tester si une case relie une composante ###");
+					System.out.println("Quel est la valeur de x ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y ?");
+					y = clavier.nextInt();
+					if(!relieComposantes(x, y, couleur))
+					{
+						System.out.println("Cette case ne relie aucune composante.");
+					}
+					else
+					{
+						System.out.println("Cette case relie une ou plusieurs composante(s).");
+					}
+					break;
+				case 4:
+					System.out.println("### Tester s'il existe un chemin entre deux cases données ###");
+					System.out.println("Quel est la valeur de x de la première case ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y de la première case ?");
+					y = clavier.nextInt();
+					System.out.println("Quel est la valeur de x de la deuxième case ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y de la deuxième case ?");
+					y = clavier.nextInt();
+					if (existeCheminCases(tableauPeres_[x][y], tableauPeres_[x2][y2], couleur))
+					{
+						System.out.println("Il existe un chemin entre les deux cases.");
+					}
+					else
+					{
+						System.out.println("Il n'existe pas de chemin entre les deux cases.");
+					}
+					
+					break;
+				case 5:
+					fin = true;
+					break;
 
-			preparerScore(x, y, couleur);
-
-			++i;
-			if (scoreJ2_ == etoiles)
-			{
-				System.out.println("Joueur bleu a gagné !");
-				fin = true;
-			}
-			else if (scoreJ1_ == etoiles)
-			{
-				System.out.println("Joueur rouge a gagné !");
-				fin = true;
+				
 			}
 		}
 	}
