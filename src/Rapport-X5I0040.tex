@@ -141,6 +141,27 @@
                 La complexité de celui-ci est en $O(n)$ où $n$ représente le nombre de fois qu'il est nécessaire de faire des appels récursifs dans \info{compressionChemin()} pour faire la compression des chemins de tableau de pères. En effet, par le biais de \info{rechercheMemePere()} on fait appel à \info{compressionChemin()} qui est en $O(n)$ donc n'ayant pas d'autres méthodes appelées et/ou boucle intervenant dans \info{rechercheMemePere()} et dans \info{existeCheminCases()} on a bien aussi $O(n)$ pour cette dernière.
                 
                 L'algorithme est le plus efficace possible, incorporant la compression de chemin. En effet il serait possible d'avoir ici un algorithme plus efficace sans implémenter la compression de chemin. Cependant on perdrait en réalité sur le long terme puisque les recherches de pères seraient rendues plus longues et moins efficaces. C'est donc un parti pris qui sur la longueur se révélera efficace.
+                
+            \subsubsection{\info{relierCasesMin()}}
+            
+                TODO
+                
+            \subsubsection{\info{getNbEtoiles()}}
+                
+                \begin{algorithm}[H]
+                \Entree{entier x, entier y, String col}
+                \Sortie{Le nombre d'étoiles contenues dans la Composante de la Case aux coordonnées [x][y]}
+                \Retour{tableauPeres[x][y].nbEtoile()}
+                \caption{La méthode \info{getNbEtoiles()}}
+                \end{algorithm}
+                
+                La méthode \info{getNbEtoiles()} va chercher dans le tableau de pères le pères de la Case au coordonnées [x][y] et va retourner la variable du nombre d'étoiles que le père contient. En effet à chaque Union c'est le père qui récupère les étoiles de ses nouveaux fils.
+                
+                La correction de cette méthode est assez triviale. En effet on ne fait qu'appel à la variable donnant le nombre d'étoiles que contient une Composante. Celle-ci se trouve dans le père de chaque Composante et c'est donc pourquoi on va d'abord chercher le père de la Case aux coordonnées données en entrée.
+                
+                La complexité de cette méthode est en $O(1)$. En effet on ne fait qu'accéder à un emplacement spécifique dans un tableau et on retourne simplement une variable.
+                
+                Il n'est pas possible de faire plus efficace qu'$O(1)$.
 
     \subsection{\emph{optionnel} Méthodes d'évaluation}
 
