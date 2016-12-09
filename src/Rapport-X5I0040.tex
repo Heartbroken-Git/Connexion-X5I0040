@@ -17,6 +17,7 @@
 \newcommand{\info}{\texttt}
 \newcommand{\ue}{\textbf{X5I0040 "Algorithmique et Structures de Données 3"}}
 \newcommand{\Affiche}{\textbf{afficher}}
+\newcommand{\Lit}{\textbf{lire}}
 
 \pagestyle{fancy}
 \fancyfoot[C]{\thepage/\pageref{LastPage}}
@@ -73,7 +74,7 @@
                 \Sortie{Un booléen indiquant le succès ou non de l'opération}
                 \Res{La case est coloriée de la couleur donnée par col}
                 \eSi{col = "blanc"}{
-                    Case.col = col\;
+                    Case.col $\longleftarrow$ col\;
                     \Retour{vrai}\;
                 }{
                     \Affiche\ "Cette case est déjà en couleur."\;
@@ -93,36 +94,33 @@
             \subsubsection{\info{afficheComposante()}}
             
                 \begin{algorithm}[H]
-                \Entree{Case case1, Case case2, String col}
+                \Entree{int x, int y, String col}
                 \Res{Affiche la Composante formée par case1 et case2}
                 entier limite = Plateau.longueur - 1\;
-                \Si{limite > case2.x OU limite > case2.Y}{
-                    \Si{existeCheminCases(case1, case2, col)}{
-                        \Affiche\ case2.x + " : " + case2.y\;
+                \Pour{i \textbf{allant de} 0 \textbf{à} limite}{
+                    \Pour{j \textbf{allant de} 0 \textbf{à} limite}{
+                        \Si{existeCheminCases(tableauPeres[x][y],tableauPeres[i][j], col)}{
+                            \Affiche\ "La case [" + x + ", " + y + "] contient la composante suivante :"\;
+                            \Affiche\ i + ":" + j\;
+                        }
                     }
-                    case2.x = case2.x + 1\;
-                    afficheComposante(case1, case2, col)\;
-                    case2.y = case2.y + 1\;
-                    afficheComposante(case1, case2, col)\;
                 }
                 \caption{La méthode \info{afficheComposante()}}
                 \end{algorithm}
                 
-                La méthode \info{afficheComposante()} prend deux Cases et va afficher l'éventuelle Composante les liant. Pour ce faire on vérifie d'abord que les Cases données appartiennent bien au Tableau. Ensuite on teste s'il existe bien un chemin reliant les deux cases entre elles. Si c'est le cas alors on affiche la Composante les reliant. De plus une fois ceci fait on va essayer d'afficher les autres Composantes potentiellement formées par les Cases adjacentes à la première Case.
+                La méthode \info{afficheComposante()} va chercher dans tout le tableau de pères les Cases ayant le même père que la Case localisée aux coordonnées reçues en entrées. Elle va ensuite les afficher au fur et à mesure qu'elle en trouve.
                 
-                %PARTIE SUR LA CORRECTION DE L'ALGO, LÀ JE SECHE UN PEU (Corentin)
+                Cet algorithme est correct car la définition même de la Composante dans notre cas de \emph{Classe-Union} est qu'il s'agit du groupe de Cases partageant le même père. Ainsi afficher la Composante d'une Case consiste bien en l'affichage de toutes les Cases partageant le même père que la Case donnée en entrée (par le biais de ses coordonnées).
                 
-                La complexité de cet algorithme est $O(Plateau.longueur)$. En effet il est executé un nombre de fois dépendant de l'emplacement des Cases sur le Plateau mais aussi et surtout de la longueur de celui-ci. Plus le Plateau sera long plus la complexité temporelle de \info{afficheComposante()} augmentera, de façon linéaire.
+                Cette méthode a une complexité temporelle de l'ordre de $O(limite^{2})$. En effet la présence d'une boucle imbriquée dans une autre donne cette complexité qui est liée à la taille du tableau à parcourir et donc aussi à la taille du Plateau.
                 
-                %PARTIE SUR L'EFFICACITE DE L'ALGO, LÀ JE SECHE UN PEU (Corentin)
+                Il ne nous apparaît pas possible d'être beaucoup plus efficace que ceci.
                 
             \subsubsection{\info{existeCheminCases()}}
             
                 \begin{algorithm}[H]
                 \Entree{Case case1, Case case2}
                 \Sortie{Un booléen indiquant si case1 et case2 ont le même père}
-                compressionChemin(case1.x, case1.y)\;
-                compressionChemin(case2.x, case2.y)\;
                 \Retour{tableauPeres[case1.x][case1.y] = tableauPeres[case2.x][case2.y]}
                 \caption{La méthode \info{rechercheMemePere()} utilisée par \info{existeCheminCases()}}
                 \end{algorithm}
@@ -138,9 +136,9 @@
                 
                 L'appartenance à une même Composante est donnée par le tableau de pères. Cette appartenance montre qu'il y a bien un chemin reliant nos deux Cases. La vérification de la couleur portée par celles-ci est une dernière étape afin de s'assurer que l'on respecte bien la partie "de la même couleur" de la consigne. Ainsi l'algorithme est donc correct.
                 
-                La complexité de celui-ci est en $O(n)$ où $n$ représente le nombre de fois qu'il est nécessaire de faire des appels récursifs dans \info{compressionChemin()} pour faire la compression des chemins de tableau de pères. En effet, par le biais de \info{rechercheMemePere()} on fait appel à \info{compressionChemin()} qui est en $O(n)$ donc n'ayant pas d'autres méthodes appelées et/ou boucle intervenant dans \info{rechercheMemePere()} et dans \info{existeCheminCases()} on a bien aussi $O(n)$ pour cette dernière.
+                La complexité de celui-ci est en $O(1)$. En effet \info{existeCheminCases()} fait uniquement appel à \info{rechercheMemePere()} qui est lui même en $O(1)$.
                 
-                L'algorithme est le plus efficace possible, incorporant la compression de chemin. En effet il serait possible d'avoir ici un algorithme plus efficace sans implémenter la compression de chemin. Cependant on perdrait en réalité sur le long terme puisque les recherches de pères seraient rendues plus longues et moins efficaces. C'est donc un parti pris qui sur la longueur se révélera efficace.
+                Il n'est pas possible d'être plus efficace qu'$O(1)$.
                 
             \subsubsection{\info{relierCasesMin()}}
             
@@ -190,20 +188,148 @@
                 
             \subsubsection{\info{relieComposante()}}
                 
-                TODO
+                \begin{algorithm}[H]
+                \Entree{entier x, entier y, String col}
+                \Sortie{un booléen indiquant si la Case au coordonnées [x][y] relie une ou plusieurs Composantes avec la Case d'origine}
+                \eSi{getLesVoisins(x,y,col).x = x ET getLesVoisins(x,y,col).y = y}{
+                    \Retour{faux}\;
+                }{
+                    \Retour{getLesVoisins(x,y,col).col = tableauPeres[x][y].col}
+                }
+                \caption{La méthode \info{relieComposante()}}
+                \end{algorithm}
+                
+                La méthode \info{relieComposante()} regarde initialement que la Case donnée par les coordonnées [x][y] n'est pas déja la Case d'origine. Si c'est le cas alors la méthode retourne forcément faux. Si ce n'est pas le cas il suffit alors de regarder si les voisins de la Case en [x][y] sont de la même couleur que la Composante de la Case [x][y].
+                
+                L'algorithme est correct car il vérifie d'abord le cas où l'utilisateur donne les coordonnées de la Case d'origine. Ensuite on vérifie bien que les voisins de la Case sont de la même couleur que la Composante de la Case en elle même, condition sine qua non pour que la Case puisse relier une ou plusieurs Composantes.
+                
+                La méthode a une complexité de $O(1)$ en effet elle ne comprend pas de boucle et le seul appel à une fonction est à \info{getLesVoisins()} qui elle-même a une complexité temporelle en $O(1)$.
+                
+                Il n'est pas possible de faire plus efficace qu'$O(1)$.
                 
             \subsubsection{\info{joueDeuxHumains()}}
             
+                On utilise et intialise les variables suivantes dans l'algorithme ci-dessous :\\
+                booléen fin $\longleftarrow$ faux\\
+                booléen result $\longleftarrow$ faux\\
+                entier etoiles, choix\\
+                entier i $\longleftarrow$ 0\\
+                entier x $\longleftarrow$ 0\\
+                entier y $\longleftarrow$ 0\\
+                entier x2 $\longleftarrow$ 0\\
+                entier y2 $\longleftarrow$ 0\\
+                String couleur
+                
+                \begin{algorithm}[H]
+                etoiles $\longleftarrow$ initialiser()\;
+                \Tq{$lnot$fin}{
+                    \eSi{i mod 2 = 0}{
+                        Plateau.couleur $\longleftarrow$ "bleu"\;
+                    }{
+                        Plateau.couleur $\longleftarrow$ "rouge"\;
+                    }
+                    \Affiche\ affichage du menu\;
+                    \Lit\ choix\;
+                    \Affiche\ tableau graphique du jeu\;
+                    \Suivant{choix}{
+                        \Cas{1}{
+                            \emph{cf Cas 1}
+                        }
+                        \Cas{2}{
+                            \emph{cf Cas 2}
+                        }
+                        \Cas{3}{
+                            \emph{cf Cas 3}
+                        }
+                        \Cas{4}{
+                            \emph{cf Cas 4}
+                        }
+                        \Cas{5}{
+                            \emph{cf Cas 5}
+                        }
+                        \Cas{6}{
+                            fin $\longleftarrow$ vrai\;
+                        }
+                    }
+                    \eSi{scoreJ2 = etoiles}{
+                        \Affiche\ "Le joueur bleu a gagné !"\;
+                        fin $\longleftarrow$ vrai\;
+                    }{
+                        \Si{scoreJ1 = etoiles}{
+                            \Affiche\ "Le joueur rouge a gagné !"\;
+                            fin $\longleftarrow$ vrai\;
+                        }
+                    }
+                }
+                \caption{La méthode \info{joueDeuxHumains()}}
+                \end{algorithm}
+                
+                \begin{algorithm}[ht]
+                \Affiche\ demande d'ajout de case\;
+                \Lit\ x, y\;
+                result $\longleftarrow$ tableauPeres[x][y].colorerCase(couleur)\;
+                \eSi{getNbEtoiles(x,y,couleur) < getNbEtoiles(getLesVoisins(x,y,couleur).x, getLesVoisins(x,y,couleur).y,couleur)}{
+                    union(getLesVoisins(x,y,couleur).x,getLesVoisins(x,y,couleur).y,x,y)\;
+                }{
+                    union(x,y,getLesVoisins(x,y,couleur).x, getLesVoisins(x,y,couleur).y)\;
+                }
+                preparerScores(x,y,couleur)\;
+                afficheScores(couleur)\;
+                nombresEtoiles(x,y,couleur)\;
+                i $\longleftarrow$ i + 1\;
+                \caption{Le Cas 1 de la méthode \info{joueDeuxHumains()}}
+                \end{algorithm}
+                
+                \begin{algorithm}[H]
+                \Affiche\ demande de quelle Composante afficher\;
+                \Lit\ x,y\;
+                \emph{Compression de Chemin}\;
+                afficheComposante(x,y,couleur)\;
+                \caption{Le Cas 2 de la méthode \info{joueDeuxHumains()}}
+                \end{algorithm}
+                
+                \begin{algorithm}
+                \Affiche\ demande de case à tester pour relier une Composante\;
+                \Lit\ x\;
+                \emph{Compression de Chemin}\;
+                \eSi{$lnot$relieComposantes(x,y,couleur)}{
+                    \Affiche\ "Cette case ne relie aucune composante"\;
+                }{
+                    \Affiche\ "Cette case relie une ou plusieurs composantes"\;
+                }
+                \caption{Le Cas 3 de la méthode \info{joueDeuxHumains()}}
+                \end{algorithm}
+                
+                \begin{algorithm}[H]
+                \Affiche\ demande des deux cases dont on doit tester si un chemin existe entre les deux\;
+                \Lit\ x,y,x2,y2\;
+                \emph{Compression de Chemin}\;
+                \eSi{existeCheminCases(tableauPeres[x][y],tableauPeres[x2][y2],couleur)}{
+                    \Affiche\ "Il existe un chemin entre les deux cases."\;
+                }{
+                    \Affiche\ "Il n'existe pas de chemin entre les deux cases."\;
+                }
+                \caption{Le Cas 4 de la méthode \info{joueDeuxHumains()}}
+                \end{algorithm}
+                
+                \begin{algorithm}[H] %A FAIRE !
                 TODO
+                \caption{Le Cas 5 de la méthode \info{joueDeuxHumains()}}
+                \end{algorithm}
+                
 
     \subsection{\emph{(optionnel)} Méthodes d'évaluation}
 
+        Malheureusement, la méthode \info{relierCasesMin()} ayant pris beaucoup plus de temps que prévu à implémenter il ne nous a pas été possible de nous pencher sur les méthodes dont l'ajout était optionnel.
+
 \section{Jeux de données}
+
+    La position initiale des cases étoilées était choisie aléatoirement il ne nous est pas possible de donner un jeu de données exact qui reproduirait forcément le même scénario de test. Cependant nous pouvons conseiller un départ avec deux Cases étoilées par joueurs. A la suite de ce choix, le jeu se lance avec un menu, il ne reste plus qu'à jouer pour afficher le scénario (agencement des Cases étoilées) et le tester.
 
 \section{Conclusion}
 
     Ce projet fut assez intéressant car malgré la petite envergure de celui-ci le cahier des charges était très précis et le résultat final, avoir un jeu qui marche et est immédiatement utilisable, était très gratifiant. De plus cela permettait de réflechir directement sur les différentes structures de données vues en cours et de mettre en place une structure de \emph{Classe-Union} dans un cas concret, structure qui nous était totalement étrangère avant cette Unité d'Enseignement.
     
-    En ce qui concerne les quelques difficultés rencontrées au cours de la réalisation de ce projet on notera surtout la mise en place des tests afin de récupérer les voisins d'une Case. En effet nous avons difficilement trouvé une solution qui marche mais qui est surement optimisable et qui pourrait être rendue plus lisible. De plus la méthode \info{relierCasesMin()} a été très difficile à mettre en place et nous avons eu de réelles difficultés à implémenter une version un tant soit peu fonctionnelle
+    En ce qui concerne les quelques difficultés rencontrées au cours de la réalisation de ce projet on notera surtout la mise en place des tests afin de récupérer les voisins d'une Case. En effet nous avons difficilement trouvé une solution qui marche mais qui est surement optimisable et qui pourrait être rendue plus lisible. De plus la méthode \info{relierCasesMin()} a été très difficile à mettre en place et nous avons eu de réelles difficultés à implémenter une version un tant soit peu fonctionnelle.
 
 \end{document}
