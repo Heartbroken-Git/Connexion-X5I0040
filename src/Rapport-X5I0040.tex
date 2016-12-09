@@ -10,10 +10,13 @@
 \usepackage{listings}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage[boxed,french]{algorithm2e}
+\usepackage{float}
 \usepackage{hyperref}
 
 \newcommand{\info}{\texttt}
 \newcommand{\ue}{\textbf{X5I0040 "Algorithmique et Structures de Données 3"}}
+\newcommand{\Affiche}{\textbf{afficher}}
 
 \pagestyle{fancy}
 \fancyfoot[C]{\thepage/\pageref{LastPage}}
@@ -55,13 +58,89 @@
 
         La structure de données vues en cours que nous avons décidé d'utiliser est la \emph{Classe-Union}. Initialement on a donc une Classe (au sens de la \emph{Classe-Union} pas de la programmation orientée objet) par case du plateau de jeu. Puis par les utilisations d'Union (par la méthode du même nom dans \info{Plateau.java}) ce sont les Composantes qui vont être les Classes. De plus afin d'optimiser les appels nous avons implémenter une compression des chemins.
         
+        L'implémentation exacte choisie a été celle par tableau de pères. En effet dans ce cas précis il faut remonter souvent de fils aux pères afin de savoir à quelle Composante les Cases appartiennent or l'utilisation d'un arbre est optimisée pour le sens inverse. Pour descendre du père au fils. Nous avons donc fait ce choix et nous avons choisi de faire un tableau de pères à deux dimensions. Le Plateau étant à deux dimensions il paraissait logique de stocker ainsi les données concernant les pères des Cases dans une représentation tabulaire précise du Plateau.
+        
         Ainsi on peut facilement ajouter des cases au fur et à mesure du déroulement du jeu au différentes Composantes et fusionner les Composantes entre elles (si elles sont de la bonne couleur bien sur).
 
     \subsection{Implémentation des méthodes obligatoires}
 
-        Le cahier des charges du projet réquérait l'implémentation de dix méthodes spécifiques. Dans cette partie nous allons montrer comme demandé notre façon de les intégrer au programme.
+        Le cahier des charges du projet requérait l'implémentation de dix méthodes spécifiques. Dans cette partie nous allons montrer comme demandé notre façon de les intégrer au programme.
         
-            \subsubsection{PONEY}
+            \subsubsection{\info{colorerCase()}}
+            
+                \begin{algorithm}[H]
+                \Entree{String col}
+                \Sortie{Un booléen indiquant le succès ou non de l'opération}
+                \Res{La case est coloriée de la couleur donnée par col}
+                \eSi{col = "blanc"}{
+                    Case.col = col\;
+                    \Retour{vrai}\;
+                }{
+                    \Affiche\ "Cette case est déjà en couleur."\;
+                    \Retour{faux}\;
+                }
+                \caption{La méthode \info{colorerCase()}}
+                \end{algorithm}
+
+                La méthode \info{colorerCase()} prend une chaîne de caractère représentant une couleur et l'appliquera à la Case à condition que la Case soit blanche. En effet on vérifie si la Case a déja recu une couleur. Si oui il n'est pas possible de la recolorer (empêchant ainsi un joueur de prendre une Case à son adversaire). Enfin la méthode retourne un booléen indiquant la réussite ou non du coloriage à des fin de contrôles.
+                
+                L'algorithme proposé ici est correct puisqu'on ne fait qu'ajouter une couleur à la Case avec la vérification pour empêcher le "vol" de Cases. De plus dans le pire des cas une Case aura toujours une couleur puisqu'elles sont construites avec la couleur blanche affectée de base.
+                
+                La complexité de cet algorithme est en $O(1)$.
+                
+                Il n'est pas possible de faire plus efficace qu'$O(1)$.
+                
+            \subsubsection{\info{afficheComposante()}}
+            
+                \begin{algorithm}[H]
+                \Entree{Case case1, Case case2, String col}
+                \Res{Affiche la Composante formée par case1 et case2}
+                entier limite = Plateau.longueur - 1\;
+                \Si{limite > case2.x OU limite > case2.Y}{
+                    \Si{existeCheminCases(case1, case2, col)}{
+                        \Affiche\ case2.x + " : " + case2.y\;
+                    }
+                    case2.x = case2.x + 1\;
+                    afficheComposante(case1, case2, col)\;
+                    case2.y = case2.y + 1\;
+                    afficheComposante(case1, case2, col)\;
+                }
+                \caption{La méthode \info{afficheComposante()}}
+                \end{algorithm}
+                
+                La méthode \info{afficheComposante()} prend deux Cases et va afficher l'éventuelle Composante les liant. Pour ce faire on vérifie d'abord que les Cases données appartiennent bien au Tableau. Ensuite on teste s'il existe bien un chemin reliant les deux cases entre elles. Si c'est le cas alors on affiche la Composante les reliant. De plus une fois ceci fait on va essayer d'afficher les autres Composantes potentiellement formées par les Cases adjacentes à la première Case.
+                
+                %PARTIE SUR LA CORRECTION DE L'ALGO, LÀ JE SECHE UN PEU (Corentin)
+                
+                La complexité de cet algorithme est $O(Plateau.longueur)$. En effet il est executé un nombre de fois dépendant de l'emplacement des Cases sur le Plateau mais aussi et surtout de la longueur de celui-ci. Plus le Plateau sera long plus la complexité temporelle de \info{afficheComposante()} augmentera, de façon linéaire.
+                
+                %PARTIE SUR L'EFFICACITE DE L'ALGO, LÀ JE SECHE UN PEU (Corentin)
+                
+            \subsubsection{\info{existeCheminCases()}}
+            
+                \begin{algorithm}[H]
+                \Entree{Case case1, Case case2}
+                \Sortie{Un booléen indiquant si case1 et case2 ont le même père}
+                compressionChemin(case1.x, case1.y)\;
+                compressionChemin(case2.x, case2.y)\;
+                \Retour{tableauPeres[case1.x][case1.y] = tableauPeres[case2.x][case2.y]}
+                \caption{La méthode \info{rechercheMemePere()} utilisée par \info{existeCheminCases()}}
+                \end{algorithm}
+                
+                \begin{algorithm}[H]
+                \Entree{Case case1, Case case2, String col}
+                \Sortie{Un booléen indiquant si case1 et case2 bien un chemin de la même couleur les reliant}
+                \Retour{rechercheMemePere(case1, case2) ET case1.col = case2.col}
+                \caption{La méthode \info{existeCheminCases()} en elle même}
+                \end{algorithm}
+                
+                La méthode \info{existeCheminCases()} recherche d'abord si les deux Case ont le même père dans le tableau de pères. On vérifie donc leur  appartenance à la même Composante. Se faisant on en profite pour appliquer la compression de chemin afin d'optimiser les futures recherches dans celui-ci. Une fois que l'on a confirmation que les deux Cases ont le même père il suffit de s'assurer que celles-ci sont bien de la même couleur. Si c'est le cas alors il existe bien un chemin d'une couleur entre les deux Cases.
+                
+                L'appartenance à une même Composante est donnée par le tableau de pères. Cette appartenance montre qu'il y a bien un chemin reliant nos deux Cases. La vérification de la couleur portée par celles-ci est une dernière étape afin de s'assurer que l'on respecte bien la partie "de la même couleur" de la consigne. Ainsi l'algorithme est donc correct.
+                
+                La complexité de celui-ci est en $O(n)$ où $n$ représente le nombre de fois qu'il est nécessaire de faire des appels récursifs dans \info{compressionChemin()} pour faire la compression des chemins de tableau de pères. En effet, par le biais de \info{rechercheMemePere()} on fait appel à \info{compressionChemin()} qui est en $O(n)$ donc n'ayant pas d'autres méthodes appelées et/ou boucle intervenant dans \info{rechercheMemePere()} et dans \info{existeCheminCases()} on a bien aussi $O(n)$ pour cette dernière.
+                
+                L'algorithme est le plus efficace possible, incorporant la compression de chemin. En effet il serait possible d'avoir ici un algorithme plus efficace sans implémenter la compression de chemin. Cependant on perdrait en réalité sur le long terme puisque les recherches de pères seraient rendues plus longues et moins efficaces. C'est donc un parti pris qui sur la longueur se révélera efficace.
 
     \subsection{\emph{optionnel} Méthodes d'évaluation}
 
@@ -70,4 +149,3 @@
 \section{Conclusion}
 
 \end{document}
-
