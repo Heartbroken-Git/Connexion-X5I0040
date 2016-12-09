@@ -121,8 +121,15 @@ class Plateau
 	//Fin question 3)
 
 	//Pour la question 4) relierCasesMin
-	public boolean relierCasesMin()
+	public boolean relierCasesMin(int x, int y, int z, int t)
 	{
+		for (int i = x; i < z; ++i)
+		{
+			for (int j=y; j < t; ++j)
+			{
+				
+			}
+		}
 		return true;
 	}
 	//Fin question 4)
