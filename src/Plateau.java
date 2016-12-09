@@ -61,7 +61,9 @@ class Plateau
 		if (tableauPeres_[x][y].getX() != x && tableauPeres_[x][y].getY() != y)
 		{
 			tableauPeres_[x][y] = tableauPeres_[tableauPeres_[x][y].getX()][tableauPeres_[x][y].getY()];
+			tableauPeres_[x][y].setNbEtoile(tableauPeres_[tableauPeres_[x][y].getX()][tableauPeres_[x][y].getY()].getNbEtoile());
 			compressionChemin(tableauPeres_[x][y].getX(), tableauPeres_[x][y].getY());
+
 			System.out.println(x+":"+y);
 		}
 		else
