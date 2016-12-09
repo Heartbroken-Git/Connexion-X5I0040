@@ -170,14 +170,15 @@ class Plateau
 	// Pour la question 7) relieComposantes
 	public boolean relieComposantes(int x, int y, String col)
 	{
-		if (getLesVoisins(x, y, col) == tableauPeres_[x][y])
-		{
-			return false;
-		}
-		else
-		{
-			return (getLesVoisins(x, y, col).getCol() == tableauPeres_[x][y].getCol());
-		}
+			if(getLesVoisins(x, y, col).getX() == x && getLesVoisins(x, y, col).getY() == y)
+			{
+				return false;
+			}
+			else
+			{
+				return (getLesVoisins(x, y, col).getCol() == tableauPeres_[x][y].getCol());
+			}
+		/*}*/
 		/*if (x == 0)
 		{
 		 	return (tableauPeres_[x+1][y].getCol() == tableauPeres_[x][y].getCol()
@@ -649,6 +650,7 @@ class Plateau
 		boolean fin = false;
 		boolean result = false;
 		int etoiles;
+		int choix;
 		int i = 0;
 		int x = 0;
 		int y = 0;
@@ -664,14 +666,28 @@ class Plateau
 			{
 				couleur = "rouge";
 			}
+			System.out.println("1-Jouer");
+			System.out.println("2-Afficher une composante");
+			System.out.println("3-Vérifier si un pion relie une composante");
+			System.out.println("4-Regarder s'il existe un chemin entre deux cases d'une couleur donnée")
+			System.out.println("4-Quitter");
+
 			afficher(i);
+			choix = clavier.nextInt();
 			afficheScores(couleur);
 			System.out.println("Quel est la valeur de x ?");
 			x = clavier.nextInt();
 			System.out.println("Quel est la valeur de y ?");
 			y = clavier.nextInt();
 			result = tableauPeres_[x][y].colorerCase(couleur);
-			System.out.println(relieComposantes(x, y, couleur));
+			if(!relieComposantes(x, y, couleur))
+			{
+				System.out.println("Cette case ne relie aucune composante.");
+			}
+			else
+			{
+				System.out.println("Cette case relie une ou plusieurs composante(s).");
+			}
 			
 			System.out.println(existeCheminCases(getLesVoisins(x, y, couleur), tableauPeres_[x][y], couleur));
 			if (getNbEtoiles(x, y, couleur) < getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
@@ -682,7 +698,9 @@ class Plateau
 			{
 				union(x, y, getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY());
 			}
+
 			preparerScore(x, y, couleur);
+
 			++i;
 			if (scoreJ2_ == etoiles)
 			{
