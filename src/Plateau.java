@@ -122,13 +122,38 @@ class Plateau
 	//Pour la question 4) relierCasesMin
 	public int relierCasesMin(int x, int y, int z, int t, String col)
 	{
+		boolean visite[][];
+		boolean tousVisite;
+		Case predecesseur[][];
+		int poids_[][];
+		int min;
+		String couleur = "blanc";
 		int k = 0;
 		for (int i = 0; i <= longueur_-1; ++i)
 		{
 			for(int j = 0; j <= longueur_-1; ++j)
 			{
-
+				poids[i][j] = Integer.MAX_VALUE;
+				if (tableauPeres_[i][j].getCol() != col && tableauPeres_[i][j] != couleur)
+				{
+					visite[i][j] = true;
+					poids[i][j] = -1;
+					predecesseur[i][j] = tableauPeres_[i][j];
+				}
+				else
+				{
+					visite[i][j] = false;
+					predecesseur[i][j] = null;
+				}
 			}
+		}
+		predecesseur[x][y] = tableauPeres_[x][y];
+		poids[x][y] = 0;
+
+		if(poids[z][t] > poids[x][y])
+		{
+			poids[z][t] = poids[x][y] +1;
+			predecesseur[z][t] = tableauPeres_[x][y];
 		}
 		return k;
 	}
