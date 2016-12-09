@@ -686,6 +686,16 @@ class Plateau
 					y = clavier.nextInt();
 					result = tableauPeres_[x][y].colorerCase(couleur);
 					afficheScores(couleur);
+					//System.out.println(existeCheminCases(getLesVoisins(x, y, couleur), tableauPeres_[x][y], couleur));
+					if (getNbEtoiles(x, y, couleur) < getNbEtoiles(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), couleur))
+					{
+						union(getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY(), x, y);
+					}
+					else
+					{
+						union(x, y, getLesVoisins(x, y, couleur).getX(), getLesVoisins(x, y, couleur).getY());
+					}
+					++i;
 					break;
 				case 2:
 					System.out.println("### Afficher une composante ###");
@@ -740,6 +750,7 @@ class Plateau
 
 				
 			}
+		
 		}
 	}
 	//Fin question 8)
