@@ -97,7 +97,7 @@ class Plateau
 			{
 				if (existeCheminCases(tableauPeres_[x][y], tableauPeres_[i][j], col))
 				{
-					System.out.println("La case ["+x+", "+y+"] contient les composantes suivantes :");
+					System.out.println("La case ["+x+", "+y+"] contient la composante suivante :");
 					System.out.println(i+":"+j);
 				}
 			}
