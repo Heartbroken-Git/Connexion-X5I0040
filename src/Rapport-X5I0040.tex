@@ -162,8 +162,41 @@
                 La complexité de cette méthode est en $O(1)$. En effet on ne fait qu'accéder à un emplacement spécifique dans un tableau et on retourne simplement une variable.
                 
                 Il n'est pas possible de faire plus efficace qu'$O(1)$.
+                
+            \subsubsection{\info{afficheScores()}}
+            
+                \begin{algorithm}[H]
+                \Entree{String col}
+                \Res{Affiche le score du joueur à la couleur col}
+                \eSi{col = "bleu"}{
+                    \Affiche\ "Vous avez réussi à connecter " + Plateau.scoreJ2 + " étoiles."\;
+                }{
+                    \eSi{col = "rouge"}{
+                        \Affiche\ ""Vous avez réussi à connecter " + Plateau.scoreJ1 + " étoiles."\;
+                    }{
+                        \Affiche\ "Couleur fausse"\;
+                    }
+                }
+                \caption{La méthode \info{afficheScores()}}
+                \end{algorithm}
+                
+                La méthode \info{afficheScores()} prend la couleur du joueur dont on veut afficher les scores puis va chercher dans le Plateau la variable correspondante puis va l'afficher.
+                
+                Une fois de plus cette méthode est assez triviale. En effet elle ne fait que chercher la variable du joueur correspondant à la couleur donnée.
+                
+                Cette méthode a une complexité temporelle en $O(1)$ puisqu'il ne s'agit que d'un affichage d'une variable une fois un simple test effectué.
+                
+                Il n'est pas possible de faire plus efficace que $O(1)$ en terme de complexité temporelle.
+                
+            \subsubsection{\info{relieComposante()}}
+                
+                TODO
+                
+            \subsubsection{\info{joueDeuxHumains()}}
+            
+                TODO
 
-    \subsection{\emph{optionnel} Méthodes d'évaluation}
+    \subsection{\emph{(optionnel)} Méthodes d'évaluation}
 
 \section{Jeux de données}
 
