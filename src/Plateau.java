@@ -91,9 +91,9 @@ class Plateau
 
 		int limite = getLongueur()-1;
 
-		for (int i = 0; i < limite; ++i)
+		for (int i = 0; i <= limite; ++i)
 		{
-			for (int j=0; j < limite; ++j)
+			for (int j=0; j <= limite; ++j)
 			{
 				if (existeCheminCases(tableauPeres_[x][y], tableauPeres_[i][j], col))
 				{
@@ -120,16 +120,21 @@ class Plateau
 	//Fin question 3)
 
 	//Pour la question 4) relierCasesMin
-	public boolean relierCasesMin(int x, int y, int z, int t)
+	public int relierCasesMin(int x, int y, int z, int t, String col)
 	{
+		String couleur;
+		int k = 0;
 		for (int i = x; i < z; ++i)
 		{
-			for (int j=y; j < t; ++j)
+			for (int j = y; j < t; ++j)
 			{
-				
+				if (tableauPeres_[i][j].getCol() == "blanc" || tableauPeres_[i][j].getCol() == col)
+				{	
+					++k; 
+				}
 			}
 		}
-		return true;
+		return k;
 	}
 	//Fin question 4)
 	
@@ -670,7 +675,7 @@ class Plateau
 			System.out.println("2-Afficher une composante");
 			System.out.println("3-Vérifier si une case relie une composante");
 			System.out.println("4-Regarder s'il existe un chemin entre deux cases d'une couleur donnée");
-			System.out.println("5-Afficher le nombre minimum de cases entre deux cases données (x,y) et (z,t)")
+			System.out.println("5-Afficher le nombre minimum de cases entre deux cases données (x,y) et (z,t)");
 			System.out.println("6-Quitter");
 			choix = clavier.nextInt();
 			afficher(i);
@@ -701,9 +706,9 @@ class Plateau
 					break;
 				case 2:
 					System.out.println("### Afficher une composante ###");
-					System.out.println("Quel est la valeur de x de la première case ?");
+					System.out.println("Quel est la valeur de x ?");
 					x = clavier.nextInt();
-					System.out.println("Quel est la valeur de y de la première case ?");
+					System.out.println("Quel est la valeur de y ?");
 					y = clavier.nextInt();
 					compressionChemin(x, y);
 					compressionChemin(x2, y2);
@@ -748,6 +753,18 @@ class Plateau
 					
 					break;
 				case 5:
+					System.out.println("### Afficher nombre minimum de cases qui relie deux cases ###");
+					System.out.println("Quel est la valeur de x de la première case ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y de la première case ?");
+					y = clavier.nextInt();
+					System.out.println("Quel est la valeur de x de la deuxième case ?");
+					x = clavier.nextInt();
+					System.out.println("Quel est la valeur de y de la deuxième case ?");
+					y = clavier.nextInt();
+					compressionChemin(x, y);
+					compressionChemin(x2, y2);
+					System.out.println(relierCasesMin(x, y, x2, y2, couleur));
 					break;
 				case 6:
 					fin = true;
