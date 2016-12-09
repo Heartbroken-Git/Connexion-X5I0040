@@ -142,7 +142,7 @@
                 
             \subsubsection{\info{relierCasesMin()}}
             
-                TODO
+                Malheureusement nous n'avons pas réussi à implémenter une méthode fonctionnelle pour \info{relierCasesMin()} dans le temps imparti. Cependant le code de celle-ci est toujours présent dans le fichier \info{Plateau.java}. En effet nous avons tenter d'implémenter une version de l'algorithme de \bsc{Dijkstra} mais cette implémentation ne fonctionne pas. Elle ne crashe pas et ne cause pas de problèmes à la compilation donc il semblerait que cela soit notre approche algorithmique qui soit incorrecte. Ainsi celle-ci ne risquant pas l'intégrité fonctionnelle du programme nous l'avons conservée dans le code afin de montrer notre tentative de résolution de cette partie du cahier des charges du sujet.
                 
             \subsubsection{\info{getNbEtoiles()}}
                 
@@ -209,7 +209,7 @@
                 
             \subsubsection{\info{joueDeuxHumains()}}
             
-                On utilise et intialise les variables suivantes dans l'algorithme ci-dessous :\\
+                On utilise et intialise les variables suivantes dans l'algorithme ci-après :\\
                 booléen fin $\longleftarrow$ faux\\
                 booléen result $\longleftarrow$ faux\\
                 entier etoiles, choix\\
@@ -218,7 +218,8 @@
                 entier y $\longleftarrow$ 0\\
                 entier x2 $\longleftarrow$ 0\\
                 entier y2 $\longleftarrow$ 0\\
-                String couleur
+                String couleur\\
+                \newline
                 
                 \begin{algorithm}[H]
                 etoiles $\longleftarrow$ initialiser()\;
@@ -312,8 +313,11 @@
                 \caption{Le Cas 4 de la méthode \info{joueDeuxHumains()}}
                 \end{algorithm}
                 
-                \begin{algorithm}[H] %A FAIRE !
-                TODO
+                \begin{algorithm}[ht]
+                \Affiche\ demande des deux cases dont on veut savoir la distance minimum les séparant\;
+                \Lit\ x,y,x2,y2\;
+                \emph{Compression de Chemin}
+                \Affiche\ relierCasesMin(x,y,x2,y2,couleur)\;
                 \caption{Le Cas 5 de la méthode \info{joueDeuxHumains()}}
                 \end{algorithm}
                 
@@ -330,6 +334,6 @@
 
     Ce projet fut assez intéressant car malgré la petite envergure de celui-ci le cahier des charges était très précis et le résultat final, avoir un jeu qui marche et est immédiatement utilisable, était très gratifiant. De plus cela permettait de réflechir directement sur les différentes structures de données vues en cours et de mettre en place une structure de \emph{Classe-Union} dans un cas concret, structure qui nous était totalement étrangère avant cette Unité d'Enseignement.
     
-    En ce qui concerne les quelques difficultés rencontrées au cours de la réalisation de ce projet on notera surtout la mise en place des tests afin de récupérer les voisins d'une Case. En effet nous avons difficilement trouvé une solution qui marche mais qui est surement optimisable et qui pourrait être rendue plus lisible. De plus la méthode \info{relierCasesMin()} a été très difficile à mettre en place et nous avons eu de réelles difficultés à implémenter une version un tant soit peu fonctionnelle.
+    En ce qui concerne les quelques difficultés rencontrées au cours de la réalisation de ce projet on notera surtout la mise en place des tests afin de récupérer les voisins d'une Case. En effet nous avons difficilement trouvé une solution qui marche mais qui est surement optimisable et qui pourrait être rendue plus lisible. De plus la méthode \info{relierCasesMin()} a été très difficile à mettre en place et nous avons eu de réelles difficultés à implémenter une version un tant soit peu fonctionnelle etn'avons pas réussi à obtenir celle-ci avant de devoir rendre le projet.
 
 \end{document}
