@@ -670,7 +670,8 @@ class Plateau
 			System.out.println("2-Afficher une composante");
 			System.out.println("3-Vérifier si une case relie une composante");
 			System.out.println("4-Regarder s'il existe un chemin entre deux cases d'une couleur donnée");
-			System.out.println("5-Quitter");
+			System.out.println("5-Afficher le nombre minimum de cases entre deux cases données (x,y) et (z,t)")
+			System.out.println("6-Quitter");
 			choix = clavier.nextInt();
 			afficher(i);
 			switch (choix)
@@ -747,6 +748,8 @@ class Plateau
 					
 					break;
 				case 5:
+					break;
+				case 6:
 					fin = true;
 					break;
 			}
