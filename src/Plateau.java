@@ -95,19 +95,14 @@ class Plateau
 		{
 			for (int j=0; j < limite; ++j)
 			{
-				if (existeCheminCases(tableauPeres_[x][y], col))
-			{
-				System.out.println(x+" : "+y);
+				if (existeCheminCases(tableauPeres_[x][y], tableauPeres_[i][j], col))
+				{
+					System.out.println("La case ["+x+", "+y+"] contient les composantes suivantes :");
+					System.out.println(i+":"+j);
+				}
 			}
-				
-			
-			++x;
-			afficheComposante(x, y, col);
-			++y;
-			afficheComposante(x, y, col);
 		}
 			
-		}
 
 	}
 	//Fin question 2)
@@ -709,13 +704,9 @@ class Plateau
 					x = clavier.nextInt();
 					System.out.println("Quel est la valeur de y de la première case ?");
 					y = clavier.nextInt();
-					System.out.println("Quel est la valeur de x de la deuxième case ?");
-					x = clavier.nextInt();
-					System.out.println("Quel est la valeur de y de la deuxième case ?");
-					y = clavier.nextInt();
 					compressionChemin(x, y);
 					compressionChemin(x2, y2);
-					afficheComposante(tableauPeres_[x][y], tableauPeres_[x2][y2], couleur);
+					afficheComposante(x, y, couleur);
 					break;
 				case 3:
 					System.out.println("### Tester si une case relie une composante ###");
